@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\BoardgameController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,4 +46,20 @@ Route::middleware('auth:api')->group(function () {
             ->middleware('role:admin')
             ->where('id', '[0-9]+'); 
     });
+    
+    //Boardgames
+    Route::prefix('v1/boardgames')->group(function () {
+        Route::get('', [BoardgameController::class, 'index']); 
+        Route::get('/{id}', [BoardgameController::class, 'detail'])
+            ->where('id', '[0-9]+'); 
+        Route::post('', [BoardgameController::class, 'store'])
+            ->middleware('role:admin,junta'); 
+        Route::put('/{id}', [BoardgameController::class, 'update'])
+            ->middleware('role:admin,junta')
+            ->where('id', '[0-9]+'); 
+        Route::delete('/{id}', [BoardgameController::class, 'destroy'])
+            ->middleware('role:admin,junta')
+            ->where('id', '[0-9]+'); 
+    });
+    
 });

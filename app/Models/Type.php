@@ -34,9 +34,7 @@ class Type extends Model
             'type' => 'string',
             'description' => 'string',
         ];
-    }
-
-    /*
+    }    
     public function boardgames()
     {
         return $this->belongsToMany(
@@ -45,6 +43,5 @@ class Type extends Model
             'type_id',
             'boardgame_id'
         )->withTimestamps();
-    }
-    */
+    }    
 }
