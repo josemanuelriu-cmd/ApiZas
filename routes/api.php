@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TypeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +26,23 @@ Route::middleware('auth:api')->group(function () {
             ->where('id', '[0-9]+'); 
         Route::delete('/{id}', [UserController::class, 'destroy'])
             ->middleware('role:admin')    
+            ->where('id', '[0-9]+'); 
+    });
+
+    //Types
+    Route::prefix('v1/types')->group(function () {
+        Route::get('', [TypeController::class, 'index'])
+            ->middleware('role:admin,junta,partner'); 
+        Route::get('/{id}', [TypeController::class, 'detail'])
+            ->middleware('role:admin,junta,partner')
+            ->where('id', '[0-9]+'); 
+        Route::post('', [TypeController::class, 'store'])
+            ->middleware('role:admin,junta'); 
+        Route::put('/{id}', [TypeController::class, 'update'])
+            ->middleware('role:admin,junta')
+            ->where('id', '[0-9]+'); 
+        Route::delete('/{id}', [TypeController::class, 'destroy'])
+            ->middleware('role:admin')
             ->where('id', '[0-9]+'); 
     });
 });
