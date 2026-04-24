@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Passport\Passport;
 use Tests\TestCase;
+use App\Models\User;
 
 class UserTest extends TestCase
 {
@@ -40,11 +42,11 @@ class UserTest extends TestCase
         $user = User::factory()
             ->withPassword('password')
             ->create([
-                'email' => 'test@example.com',
+                'email' => 'testlogout@example.com',
             ]);
 
-        $response = $this->actingAs($user, 'api') 
-                     ->postJson('/api/v1/logout');
+        Passport::actingAs($user);
+        $response = $this->postJson('/api/v1/logout');
         $response->assertStatus(200)
             ->assertJson([
                 'message' => 'Logged out successfully'
