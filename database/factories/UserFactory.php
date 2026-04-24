@@ -24,10 +24,18 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'num_partner' => fake()->unique()->numberBetween(1,10),
+            'nickname' => fake()->unique()->name(),
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'type' => $this->faker->randomElement(['admin', 'junta', 'partner', 'guest']),
+            'registration_date' => now(),
+            'withdrawal_date' => null,
+            'email' => fake()->unique()->safeEmail(),
+            'telephone' => fake()->unique()->phoneNumber(),
+            'age' => fake()->numberBetween(1,100),
+            'language' => 'es',
+            'email_verified_at' => now(),            
             'remember_token' => Str::random(10),
         ];
     }
@@ -39,6 +47,38 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn () => [
+            'type' => 'admin',
+        ]);
+    }
+    public function junta(): static
+    {
+        return $this->state(fn () => [
+            'type' => 'junta',
+        ]);
+    }
+    public function partner(): static
+    {
+        return $this->state(fn () => [
+            'type' => 'partner',
+        ]);
+    }
+    public function guest(): static
+    {
+        return $this->state(fn () => [
+            'type' => 'guest',
+        ]);
+    }
+
+    public function withPassword(string $password): static
+    {
+        return $this->state(fn () => [
+            'password' => Hash::make($password),
         ]);
     }
 }
