@@ -206,11 +206,12 @@ class BoardgameTest extends TestCase
         $response = $this->putJson("/api/v1/boardgames/{$boardgame->id}", $data);
         $response->assertStatus(200);
         $response->assertJsonFragment([
-            'name' => 'Pruebas Update junta',
+            'name' => 'Pruebas Update Junta',
+            'slug' => 'pruebas-update-junta',
         ]);
         $this->assertDatabaseHas('boardgames', [
             'id' => $boardgame->id,
-            'name' => 'Pruebas Update junta',
+            'name' => 'Pruebas Update Junta',
             'slug' => 'pruebas-update-junta',
         ]);
     }

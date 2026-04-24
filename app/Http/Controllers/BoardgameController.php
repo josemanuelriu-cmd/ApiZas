@@ -29,17 +29,22 @@ class BoardgameController extends Controller
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
-            'name' => 'required|string', 
-            'slug' => 'required|string', 
-            'min_players' => 'required|integer', 
-            'max_players' => 'required|integer', 
-            'min_age' => 'required|integer', 
-            'duration' => 'required|integer', 
-            'description' => 'required|string',
+            'name' => 'required|string',
+            'slug' => 'nullable|string',
+            'min_players' => 'required|integer',
+            'max_players' => 'required|integer',
+            'min_age' => 'required|integer',
+            'duration' => 'required|integer',
+            'description' => 'nullable|string',
             'owner_user_id' => 'nullable|integer|exists:users,id',
             'types'         => 'nullable|array',
             'types.*'       => 'integer|exists:types,id'
         ]);
+
+        if (empty($data['slug'])) {
+            $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
+        }
+
         $boardgames = Boardgame::create($data);
         $boardgames->types()->sync($request->input('types', []));
 
