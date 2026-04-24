@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            TypeSeeder::class,
+            BoardgameSeeder::class,
         ]);
         Artisan::call('passport:client', [
             '--personal' => true,
