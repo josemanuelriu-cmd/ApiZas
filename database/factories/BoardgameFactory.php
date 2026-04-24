@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 /**
  * @extends Factory<Boardgames>
  */
-class BoardgamesFactory extends Factory
+class BoardgameFactory extends Factory
 {
 
     /**
@@ -30,7 +30,5 @@ class BoardgamesFactory extends Factory
             'description' => fake()->text(),
             'owner_user_id' => null
         ];
-    }
-
-    
+    }    
 }
