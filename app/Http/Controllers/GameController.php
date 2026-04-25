@@ -83,8 +83,7 @@ class GameController extends Controller
     
     public function join($game_id): JsonResponse
     {
-        /** @var \App\Models\User $user */
-        
+        /** @var \App\Models\User $user */        
         $user = Auth::guard('api')->user();
         if (!$user) { 
             return response()->json([

@@ -328,7 +328,7 @@ class GameTest extends TestCase
         $response = $this->postJson("/api/v1/games/{$game->id}/join");
         $response->assertStatus(200);
         $response->assertJson([
-            'message' => 'Joined game',
+            'message' => 'User joined the game',
         ]);
         $this->assertDatabaseHas('game_user', [
             'game_id' => $game->id,
@@ -346,7 +346,7 @@ class GameTest extends TestCase
         $response = $this->deleteJson("/api/v1/games/{$game->id}/leave");
         $response->assertStatus(200);
         $response->assertJson([
-            'message' => 'Left game',
+            'message' => 'User left the game',
         ]);
         $this->assertDatabaseMissing('game_user', [
             'game_id' => $game->id,
@@ -364,7 +364,7 @@ class GameTest extends TestCase
         $response = $this->postJson("/api/v1/games/{$game->id}/join");
         $response->assertStatus(409);
         $response->assertJson([
-            'message' => 'Already joined',
+            'message' => 'User already joined this game',
         ]);
     }
     public function test_get_users_in_game()
@@ -372,7 +372,7 @@ class GameTest extends TestCase
         $user = User::factory()->admin()->create();
         Passport::actingAs($user);
         $game = Game::factory()->create();
-        $game->users()->attach($user->id);
+        $game->players()->attach($user->id);
 
         $response = $this->getJson("/api/v1/games/{$game->id}/users");
         $response->assertStatus(200);
