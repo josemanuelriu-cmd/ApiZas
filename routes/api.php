@@ -10,6 +10,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/docs-scalar', 'scalar');
+
 Route::post('/v1/login', [UserController::class, 'login']);
 Route::post('/v1/register', [UserController::class, 'register']);
 Route::middleware('auth:api')->group(function () {
@@ -88,7 +90,7 @@ Route::middleware('auth:api')->group(function () {
 
         Route::get('/{id}/games', [GameController::class, 'indexSession'])
             ->middleware('role:admin,junta,partner,guest')
-            ->where('id', '[0-9]+');         
+            ->where('id', '[0-9]+');     
     });
 
     //Games    
