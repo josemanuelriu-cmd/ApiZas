@@ -67,14 +67,12 @@ class Zassession extends Model
             'user_id', 
         );
     }
-
-    /*
+    
     public function games()
     {
         return $this->hasMany(
             Game::class, 
             'zassession_id'
         );
-    }
-    */
+    }    
 }

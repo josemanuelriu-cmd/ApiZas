@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             BoardgameSeeder::class,
             ZassessionSeeder::class,
+            GameSeeder::class,
         ]);
         Artisan::call('passport:client', [
             '--personal' => true,

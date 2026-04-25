@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\BoardgameController;
 use App\Http\Controllers\ZassessionController;
+use App\Http\Controllers\GameController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -84,12 +85,33 @@ Route::middleware('auth:api')->group(function () {
             ->middleware('role:admin,junta,partner')
             ->where('id', '[0-9]+'); 
 
-        //necesita games
-        /*
+
         Route::get('/{id}/games', [GameController::class, 'indexSession'])
             ->middleware('role:admin,junta,partner,guest')
-            ->where('id', '[0-9]+'); 
-        */
+            ->where('id', '[0-9]+');         
     });
+
+    //Games    
+    Route::prefix('v1/games')->group(function () {
+        Route::get('', [GameController::class, 'indexAll'])
+            ->middleware('role:admin,junta,partner'); 
+        Route::get('/{id}', [GameController::class, 'detail'])
+            ->where('id', '[0-9]+'); 
+        Route::post('', [GameController::class, 'store'])
+            ->middleware('role:admin,junta,partner'); 
+        Route::put('/{id}', [GameController::class, 'update'])
+            ->middleware('role:admin,junta')
+            ->where('id', '[0-9]+'); 
+        Route::delete('/{id}', [GameController::class, 'destroy'])
+            ->middleware('role:admin,junta')
+            ->where('id', '[0-9]+'); 
+        Route::post('/{id}/join', [GameController::class, 'join'])->where('id', '[0-9]+'); 
+        Route::delete('/{id}/leave', [GameController::class, 'leave'])->where('id', '[0-9]+'); 
+        Route::get('/{id}/users', [GameController::class, 'getUsers'])->where('id', '[0-9]+'); 
+        Route::get('/{id}/stats', [GameController::class, 'gameStats'])
+            ->middleware('role:admin,junta,partner')
+            ->where('id', '[0-9]+'); 
+    });
+
     
 });
