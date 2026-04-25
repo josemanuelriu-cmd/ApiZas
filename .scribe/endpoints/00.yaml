@@ -1,0 +1,341 @@
+name: Autenticación
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/login
+    metadata:
+      custom: []
+      groupName: Autenticación
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Iniciar sesión en la aplicación.'
+      description: 'Logea al usuario en la aplicación.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        custom: []
+        name: email
+        description: 'El correo electrónico del usuario. Ejemplo: john.doe@example.com'
+        required: true
+        example: qkunze@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'La contraseña del usuario. Ejemplo: secret123'
+        required: true
+        example: 'O[2UZ5ij-e/dl4m{o,'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      email: qkunze@example.com
+      password: 'O[2UZ5ij-e/dl4m{o,'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+           "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9!",
+           "user": {
+            "id": 1,
+            "num_partner": 123,
+            "nickname": "john_doe",
+            "name": "John Doe",
+            "email": "john.doe@example.com"
+           }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "User not autenticated"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/register
+    metadata:
+      custom: []
+      groupName: Autenticación
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Registrar un nuevo usuario.'
+      description: 'Crea un nuevo usuario en la aplicación.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      num_partner:
+        custom: []
+        name: num_partner
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      nickname:
+        custom: []
+        name: nickname
+        description: ''
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: mqeopfuudtdsufvyvddqa
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: eloisa.harber@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'Must be at least 6 characters.'
+        required: true
+        example: '[*UyPJ"}6'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      type:
+        custom: []
+        name: type
+        description: ''
+        required: true
+        example: guest
+        type: string
+        enumValues:
+          - admin
+          - junta
+          - partner
+          - guest
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      registration_date:
+        custom: []
+        name: registration_date
+        description: 'Must be a valid date.'
+        required: true
+        example: '2026-04-25T22:28:31'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      telephone:
+        custom: []
+        name: telephone
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      age:
+        custom: []
+        name: age
+        description: ''
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      language:
+        custom: []
+        name: language
+        description: ''
+        required: true
+        example: en
+        type: string
+        enumValues:
+          - en
+          - es
+          - ca
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      num_partner: 17
+      nickname: consequatur
+      name: mqeopfuudtdsufvyvddqa
+      email: eloisa.harber@example.com
+      password: '[*UyPJ"}6'
+      type: guest
+      registration_date: '2026-04-25T22:28:31'
+      telephone: consequatur
+      age: 17
+      language: en
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+           "token": "eyJ0eXAiOiJKV1QiLC",
+           "user": {
+             "id": 1,
+             "num_partner": 123,
+             "nickname": "john_doe",
+             "name": "John Doe",
+             "email": "john.doe@example.com"
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "email": [
+                "The email field is required."
+              ],
+              "password": [
+                "The password field is required."
+              ]
+            }
+          }
+        headers: []
+        description: 'Datos inválidos'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The email has already been taken.",
+            "errors": {
+              "email": [
+                "The email has already been taken."
+              ]
+            }
+          }
+        headers: []
+        description: 'Email ya registrado'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/logout
+    metadata:
+      custom: []
+      groupName: Autenticación
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Cerrar sesión en la aplicación.'
+      description: 'Saca al usuario de la aplicación.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Logged out successfully"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null

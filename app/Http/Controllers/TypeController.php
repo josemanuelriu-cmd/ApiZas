@@ -9,12 +9,56 @@ use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
+    /**
+     * Listar tipos
+     *
+     * Devuelve todos los tipos disponibles.
+     *
+     * @group Tipos
+     * 
+     * @response 200 [
+     *   {
+     *     "id": 1,
+     *     "type": "Tipo A",
+     *     "description": "Descripción del tipo A"
+     *   }
+     * ]
+     * @response 401 {
+     *   "message": "Unauthorized"
+     * }
+     * @response 403 {
+     *   "message": "Forbidden"
+     * }
+     */
     public function index(): JsonResponse
     {
         $types = Type::all();
         return response()->json($types);
     }
-
+    /**
+     * Obtener detalle de un tipo
+     *
+     * Devuelve la información completa de un tipo específico.
+     *
+     * @group Tipos
+     *
+     * @urlParam id integer required El ID del tipo. Ejemplo: 1
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "type": "Tipo A",
+     *   "description": "Descripción del tipo A"
+     * }     
+     * @response 401 {
+     *   "message": "Unauthorized"
+     * }
+     * @response 403 {
+     *   "message": "Forbidden"
+     * }
+     * @response 404 {
+     *   "message": "Not Found"
+     * }
+     */
     public function detail($id): JsonResponse
     {
         $types = Type::find($id);
@@ -25,7 +69,39 @@ class TypeController extends Controller
         }
         return response()->json($types);
     }
-
+    /**
+     * Crear tipo
+     *
+     * Crea un nuevo tipo con nombre y descripción.
+     *
+     * @group Tipos
+     * 
+     * @bodyParam type string required El nombre del tipo. Ejemplo: Tipo A
+     * @bodyParam description string required La descripción del tipo. Ejemplo: Descripción del tipo A
+     *
+     * @response 201 {
+     *   "id": 1,
+     *   "type": "Tipo A",
+     *   "description": "Descripción del tipo A"
+     * }
+     * @response 401 {
+     *   "message": "Unauthorized"
+     * }
+     * @response 403 {
+     *   "message": "Forbidden"
+     * }
+     * @response 422 {
+     *   "message": "Validation Error",
+     *   "errors": {
+     *     "type": [
+     *       "The type field is required."
+     *     ],
+     *     "description": [
+     *       "The description field is required."
+     *     ]
+     *   }
+     * }     
+     */
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
@@ -36,7 +112,28 @@ class TypeController extends Controller
 
         return response()->json($types, 201);
     }
-
+    /**
+     * Eliminar tipo
+     *
+     * Elimina un tipo del sistema.
+     *
+     * @group Tipos
+     *
+     * @urlParam id integer required El ID del tipo. Ejemplo: 1
+     * 
+     * @response 200 {
+     *   "message": "Type deleted"
+     * }    
+     * @response 401 {
+     *   "message": "Unauthorized"
+     * }
+     * @response 403 {
+     *   "message": "Forbidden"
+     * }
+     * @response 404 {
+     *   "message": "Not Found"
+     * }
+     */
     public function destroy($id): JsonResponse
     {
         $types = Type::find($id);
@@ -51,7 +148,44 @@ class TypeController extends Controller
             'message' => 'Type deleted',
         ]);
     }
-
+    /**
+     * Actualizar tipo
+     *
+     * Actualiza los datos de un tipo existente.
+     *
+     * @group Tipos
+     *
+     * @urlParam id integer required El ID del tipo. Ejemplo: 1 
+     * 
+     * @bodyParam type string optional El nombre del tipo. Ejemplo: Tipo A
+     * @bodyParam description string optional La descripción del tipo. Ejemplo: Descripción del tipo A
+     * 
+     * @response 200 {
+     *   "id": 1,
+     *   "type": "Tipo A",
+     *   "description": "Descripción del tipo A"
+     * }     
+     * @response 401 {
+     *   "message": "Unauthorized"
+     * }
+     * @response 403 {
+     *   "message": "Forbidden"
+     * }
+     * @response 404 {
+     *   "message": "Not Found"
+     * }
+     * @response 422 {
+     *   "message": "Validation Error",
+     *   "errors": {
+     *     "type": [
+     *       "The type field must be a string."
+     *     ],
+     *     "description": [
+     *       "The description field must be a string."
+     *     ]
+     *   }
+     * }
+     */
     public function update(Request $request, $id): JsonResponse
     {
         $types = Type::find($id);
