@@ -71,7 +71,7 @@ class ZassessionController extends Controller
         $data = $request->validate([
             'name' => 'required|string|min:3|max:255',
             'event_name' => 'required|string|min:3|max:255',
-            'date' => 'required|date|after_or_equal:today|unique:zassessions,date',
+            'date' => 'required|date|after_or_equal:today|unique:zassessions,date,'. $id,
             'start_time' => 'required|date_format:H:i:s',
             'end_time' => 'required|date_format:H:i:s|after:start_time',
             'max_users' => 'required|integer|min:1|max:100',

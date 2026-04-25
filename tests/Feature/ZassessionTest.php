@@ -195,6 +195,13 @@ class ZassessionTest extends TestCase
         $data = [
             'name' => 'Updated Zassession admin',
             'event_name' => 'An updated zassession',
+            'date' => $zassession->date->format('Y-m-d'),
+            'start_time' => $zassession->start_time->format('H:i:s'),
+            'end_time' => $zassession->end_time->format('H:i:s'),
+            'max_users' => $zassession->max_users,
+            'direction' => $zassession->direction,
+            'latitude' => $zassession->latitude,
+            'longitude' => $zassession->longitude
         ];
         $response = $this->putJson("/api/v1/zassessions/{$zassession->id}", $data);
 
@@ -210,6 +217,13 @@ class ZassessionTest extends TestCase
         $data = [
             'name' => 'Updated Zassession junta',
             'event_name' => 'An updated zassession',
+            'date' => $zassession->date->format('Y-m-d'),
+            'start_time' => $zassession->start_time->format('H:i:s'),
+            'end_time' => $zassession->end_time->format('H:i:s'),
+            'max_users' => $zassession->max_users,
+            'direction' => $zassession->direction,
+            'latitude' => $zassession->latitude,
+            'longitude' => $zassession->longitude
         ];
         $response = $this->putJson("/api/v1/zassessions/{$zassession->id}", $data);
 
@@ -225,6 +239,13 @@ class ZassessionTest extends TestCase
         $data = [
             'name' => 'Updated Zassession partner',
             'event_name' => 'An updated zassession',
+            'date' => $zassession->date->format('Y-m-d'),
+            'start_time' => $zassession->start_time->format('H:i:s'),
+            'end_time' => $zassession->end_time->format('H:i:s'),
+            'max_users' => $zassession->max_users,
+            'direction' => $zassession->direction,
+            'latitude' => $zassession->latitude,
+            'longitude' => $zassession->longitude
         ];
         $response = $this->putJson("/api/v1/zassessions/{$zassession->id}", $data);
 
@@ -292,7 +313,7 @@ class ZassessionTest extends TestCase
         $response = $this->postJson("/api/v1/zassessions/{$zassession->id}/join");
         $response->assertStatus(200);
         $response = $this->postJson("/api/v1/zassessions/{$zassession->id}/join");
-        $response->assertStatus(422);
+        $response->assertStatus(409);
     }
 
     public function test_get_users_in_zassession()
