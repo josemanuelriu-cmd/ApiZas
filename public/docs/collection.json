@@ -1,0 +1,2162 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "APIZAS API Documentation",
+        "_postman_id": "7d627390-9476-4d14-9e2c-0651ac3b0d22",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Autenticaci\u00f3n",
+            "description": "",
+            "item": [
+                {
+                    "name": "Iniciar sesi\u00f3n en la aplicaci\u00f3n.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"qkunze@example.com\",\"password\":\"O[2UZ5ij-e\\\/dl4m{o,\"}"
+                        },
+                        "description": "Logea al usuario en la aplicaci\u00f3n.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9!\",\n \"user\": {\n  \"id\": 1,\n  \"num_partner\": 123,\n  \"nickname\": \"john_doe\",\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\"\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"User not autenticated\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Registrar un nuevo usuario.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"num_partner\":17,\"nickname\":\"consequatur\",\"name\":\"mqeopfuudtdsufvyvddqa\",\"email\":\"eloisa.harber@example.com\",\"password\":\"[*UyPJ\\\"}6\",\"type\":\"guest\",\"registration_date\":\"2026-04-25T22:28:31\",\"telephone\":\"consequatur\",\"age\":17,\"language\":\"en\"}"
+                        },
+                        "description": "Crea un nuevo usuario en la aplicaci\u00f3n.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"token\": \"eyJ0eXAiOiJKV1QiLC\",\n \"user\": {\n   \"id\": 1,\n   \"num_partner\": 123,\n   \"nickname\": \"john_doe\",\n   \"name\": \"John Doe\",\n   \"email\": \"john.doe@example.com\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"email\": [\n      \"The email field is required.\"\n    ],\n    \"password\": [\n      \"The password field is required.\"\n    ]\n  }\n}",
+                            "name": "Datos inv\u00e1lidos"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The email has already been taken.\",\n  \"errors\": {\n    \"email\": [\n      \"The email has already been taken.\"\n    ]\n  }\n}",
+                            "name": "Email ya registrado"
+                        }
+                    ]
+                },
+                {
+                    "name": "Cerrar sesi\u00f3n en la aplicaci\u00f3n.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Saca al usuario de la aplicaci\u00f3n."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Logged out successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Juegos de mesa",
+            "description": "",
+            "item": [
+                {
+                    "name": "Listar juegos de mesa",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/boardgames",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/boardgames"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve todos los juegos de mesa disponibles."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Juego A\",\n    \"slug\": \"juego-a\",\n    \"min_players\": 2,\n    \"max_players\": 10,\n    \"min_age\": 8,\n    \"duration\": 60,\n    \"description\": \"Descripci\u00f3n del juego A\"\n  }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener detalle de un juego de mesa",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/boardgames\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/boardgames\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del juego de mesa. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve la informaci\u00f3n completa de un juego de mesa espec\u00edfico."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Juego A\",\n  \"slug\": \"juego-a\",\n  \"min_players\": 2,\n  \"max_players\": 10,\n  \"min_age\": 8,\n  \"duration\": 60,\n  \"description\": \"Descripci\u00f3n del juego A\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear juego de mesa",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/boardgames",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/boardgames"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"consequatur\",\"slug\":\"consequatur\",\"min_players\":17,\"max_players\":17,\"min_age\":17,\"duration\":17,\"description\":\"Dolores dolorum amet iste laborum eius est dolor.\",\"owner_user_id\":17,\"types\":[17]}"
+                        },
+                        "description": "Crea un nuevo juego de mesa con los datos proporcionados."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Juego A\",\n  \"slug\": \"juego-a\",\n  \"min_players\": 2,\n  \"max_players\": 10,\n  \"min_age\": 8,\n  \"duration\": 60,\n  \"description\": \"Descripci\u00f3n del juego A\",\n  \"owner_user_id\": null\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n  \"min_players\": [\n     \"El n\u00famero m\u00ednimo de jugadores es obligatorio.\"\n   ],\n  \"max_players\": [\n     \"El n\u00famero m\u00e1ximo de jugadores es obligatorio.\"\n   ],\n  \"min_age\": [\n     \"La edad m\u00ednima es obligatoria.\"\n   ],\n  \"duration\": [\n     \"La duraci\u00f3n es obligatoria.\"\n   ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar juego de mesa",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/boardgames\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/boardgames\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del juego de mesa. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"consequatur\",\"slug\":\"consequatur\",\"min_players\":17,\"max_players\":17,\"min_age\":17,\"duration\":17,\"description\":\"Dolores dolorum amet iste laborum eius est dolor.\",\"owner_user_id\":17,\"types\":[17]}"
+                        },
+                        "description": "Actualiza la informaci\u00f3n de un juego de mesa espec\u00edfico."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Juego A\",\n  \"slug\": \"juego-a\",\n  \"min_players\": 2,\n  \"max_players\": 10,\n  \"min_age\": 8,\n  \"duration\": 60,\n  \"description\": \"Descripci\u00f3n del juego A\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n  \"min_players\": [\n     \"El n\u00famero m\u00ednimo de jugadores es obligatorio.\"\n   ],\n  \"max_players\": [\n     \"El n\u00famero m\u00e1ximo de jugadores es obligatorio.\"\n   ],\n  \"min_age\": [\n     \"La edad m\u00ednima es obligatoria.\"\n   ],\n  \"duration\": [\n     \"La duraci\u00f3n es obligatoria.\"\n   ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Eliminar juego de mesa",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/boardgames\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/boardgames\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del juego de mesa. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Elimina un juego de mesa del sistema."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Boardgame deleted\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Partidas",
+            "description": "",
+            "item": [
+                {
+                    "name": "Listar partidas de una sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id\/games",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id\/games",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the zassession."
+                                },
+                                {
+                                    "id": "session_id",
+                                    "key": "session_id",
+                                    "value": "17",
+                                    "description": "El ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve todas las partidas disponibles de una sesi\u00f3n espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"zassession_id\": 1,\n    \"boardgame_id\": 1,\n    \"host_user_id\": 1,\n    \"max_players\": 10,\n    \"start_time\": \"14:30:00\",\n    \"status\": \"open\",\n    \"necesary_know_how\": true\n  }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar todas las partidas",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve todas las partidas disponibles."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"zassession_id\": 1,\n    \"boardgame_id\": 1,\n    \"host_user_id\": 1,\n    \"max_players\": 10,\n    \"start_time\": \"14:30:00\",\n    \"status\": \"open\",\n    \"necesary_know_how\": true\n  }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener detalle de una partida",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID de la partida. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve la informaci\u00f3n completa de una partida espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"zassession_id\": 1,\n  \"boardgame_id\": 1,\n  \"host_user_id\": 1,\n  \"max_players\": 10,\n  \"start_time\": \"14:30:00\",\n  \"status\": \"open\",\n  \"necesary_know_how\": true\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear partida",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"zassession_id\":17,\"boardgame_id\":17,\"host_user_id\":17,\"max_players\":17,\"start_time\":\"consequatur\",\"status\":\"consequatur\",\"necesary_know_how\":false}"
+                        },
+                        "description": "Crea una nueva partida con los datos proporcionados."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"id\": 1,\n  \"zassession_id\": 1,\n  \"boardgame_id\": 1,\n  \"host_user_id\": 1,\n  \"max_players\": 10,\n  \"start_time\": \"14:30:00\",\n  \"status\": \"open\",\n  \"necesary_know_how\": true\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar partidas",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID de la partida. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"zassession_id\":17,\"boardgame_id\":17,\"host_user_id\":17,\"max_players\":17,\"start_time\":\"consequatur\",\"status\":\"consequatur\",\"necesary_know_how\":false}"
+                        },
+                        "description": "Actualiza la informaci\u00f3n de una partida espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"zassession_id\": 1,\n  \"boardgame_id\": 1,\n  \"host_user_id\": 1,\n  \"max_players\": 10,\n  \"start_time\": \"14:30:00\",\n  \"status\": \"limited\",\n  \"necesary_know_how\": true\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Eliminar partida",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID de la partida. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Elimina una partida espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Game deleted\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Unirse a partida",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games\/:id\/join",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games\/:id\/join",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the game."
+                                },
+                                {
+                                    "id": "game_id",
+                                    "key": "game_id",
+                                    "value": "17",
+                                    "description": "El ID de la partida. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Permite a un usuario unirse a una partida espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"User joined the game\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"User not autenticated\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 409,
+                            "body": "{\n  \"message\": \"Game is full\"\n}",
+                            "name": "Game is full"
+                        },
+                        {
+                            "header": [],
+                            "code": 409,
+                            "body": "{\n  \"message\": \"User already joined this game\"\n}",
+                            "name": "User already joined this game"
+                        }
+                    ]
+                },
+                {
+                    "name": "Salir de una partida",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games\/:id\/leave",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games\/:id\/leave",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the game."
+                                },
+                                {
+                                    "id": "game_id",
+                                    "key": "game_id",
+                                    "value": "17",
+                                    "description": "El ID de la partida. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Permite a un usuario salir de una partida espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"User left the game\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"User not autenticated\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 409,
+                            "body": "{\n  \"message\": \"User is not joined to this game\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener jugadores de una partida",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games\/:id\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games\/:id\/users",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the game."
+                                },
+                                {
+                                    "id": "game_id",
+                                    "key": "game_id",
+                                    "value": "17",
+                                    "description": "El ID de la partida. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve la lista de jugadores que se han unido a una partida espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"num_partner\": 123,\n    \"name\": \"John Doe\",\n    \"nickname\": \"johnny\",\n    \"email\": \"john.doe@Ejemplo.com\"\n  }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n  \"message\": \"No players joined to this game\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"User not autenticated\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Estad\u00edsticas de una partida",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/games\/:id\/stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/games\/:id\/stats",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the game."
+                                },
+                                {
+                                    "id": "game_id",
+                                    "key": "game_id",
+                                    "value": "17",
+                                    "description": "El ID de la partida. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve las estad\u00edsticas de una partida espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"game_id\": 1,\n  \"zassession_id\": 1,\n  \"boardgame_id\": 1,\n  \"host_user_id\": 1,\n  \"max_players\": 10,\n  \"total_players\": 5,\n  \"start_time\": \"14:30:00\",\n  \"status\": \"playing\",\n  \"necesary_know_how\": true\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Sesiones",
+            "description": "",
+            "item": [
+                {
+                    "name": "Listar sesiones",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve todas las sesiones de juego disponibles."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Sesi\u00f3n Viernes\",\n    \"event_name\": \"Noche de juegos\",\n    \"date\": \"2026-04-10\",\n    \"max_users\": 10\n }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener detalle de una sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve la informaci\u00f3n completa de una sesi\u00f3n espec\u00edfica."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Sesi\u00f3n Viernes\",\n  \"event_name\": \"Noche de juegos\",\n  \"date\": \"2026-04-10\",\n  \"max_users\": 10\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"consequatur\",\"event_name\":\"consequatur\",\"date\":\"consequatur\",\"start_time\":\"consequatur\",\"end_time\":\"consequatur\",\"max_users\":17,\"direction\":\"consequatur\",\"latitude\":\"consequatur\",\"longitude\":\"consequatur\"}"
+                        },
+                        "description": "Crea una nueva sesi\u00f3n de juego con l\u00edmite de jugadores y localizaci\u00f3n."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Sesi\u00f3n Viernes\",\n  \"event_name\": \"Noche de juegos\",\n  \"date\": \"2026-04-10\",\n  \"max_users\": 10\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"User Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n   \"event_name\": [\n     \"El nombre del evento es obligatorio.\"\n   ],\n   \"date\": [\n     \"La fecha es obligatoria.\"\n   ],\n   \"start_time\": [\n     \"La hora de inicio es obligatoria.\"\n   ],\n   \"end_time\": [\n     \"La hora de fin es obligatoria.\"\n   ],\n   \"max_users\": [\n     \"El n\u00famero m\u00e1ximo de usuarios es obligatorio.\"\n   ],\n   \"direction\": [\n     \"La direcci\u00f3n es obligatoria.\"\n   ],\n   \"latitude\": [\n     \"La latitud es obligatoria.\"\n   ],\n   \"longitude\": [\n     \"La longitud es obligatoria.\"\n   ]\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"consequatur\",\"event_name\":\"consequatur\",\"date\":\"consequatur\",\"start_time\":\"consequatur\",\"end_time\":\"consequatur\",\"max_users\":17,\"direction\":\"consequatur\",\"latitude\":\"consequatur\",\"longitude\":\"consequatur\"}"
+                        },
+                        "description": "Actualiza los datos de una sesi\u00f3n existente."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Sesi\u00f3n Viernes\",\n  \"event_name\": \"Noche de juegos\",\n  \"date\": \"2026-04-10\",\n  \"max_users\": 10\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n   \"event_name\": [\n     \"El nombre del evento es obligatorio.\"\n   ],\n   \"date\": [\n     \"La fecha es obligatoria.\"\n   ],\n   \"start_time\": [\n     \"La hora de inicio es obligatoria.\"\n   ],\n   \"end_time\": [\n     \"La hora de fin es obligatoria.\"\n   ],\n   \"max_users\": [\n     \"El n\u00famero m\u00e1ximo de usuarios es obligatorio.\"\n   ],\n   \"direction\": [\n     \"La direcci\u00f3n es obligatoria.\"\n   ],\n   \"latitude\": [\n     \"La latitud es obligatoria.\"\n   ],\n   \"longitude\": [\n     \"La longitud es obligatoria.\"\n   ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Eliminar sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Elimina una sesi\u00f3n del sistema."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Zassession deleted\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Unirse a una sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id\/join",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id\/join",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the zassession."
+                                },
+                                {
+                                    "id": "session_id",
+                                    "key": "session_id",
+                                    "value": "17",
+                                    "description": "ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Permite al usuario autenticado unirse a una sesi\u00f3n si hay plazas disponibles."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"User joined the session\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 409,
+                            "body": "{\n  \"message\": \"Session is full\"\n}",
+                            "name": "Sesi\u00f3n llena"
+                        },
+                        {
+                            "header": [],
+                            "code": 409,
+                            "body": "{\n  \"message\": \"User already joined this session\"\n}",
+                            "name": "Usuario ya inscrito"
+                        }
+                    ]
+                },
+                {
+                    "name": "Salir de una sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id\/leave",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id\/leave",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the zassession."
+                                },
+                                {
+                                    "id": "session_id",
+                                    "key": "session_id",
+                                    "value": "17",
+                                    "description": "ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Permite al usuario abandonar una sesi\u00f3n en la que est\u00e1 inscrito."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"User left the session\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Session Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 409,
+                            "body": "{\n  \"message\": \"User is not joined to this session\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener usuarios de una sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id\/users",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the zassession."
+                                },
+                                {
+                                    "id": "session_id",
+                                    "key": "session_id",
+                                    "value": "17",
+                                    "description": "ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve todos los usuarios que se han unido a una sesi\u00f3n."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"num_partner\": 123,\n    \"nickname\": \"john_doe\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\"\n  }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n  \"message\": \"No users joined to this session\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Estad\u00edsticas globales",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/stats"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve m\u00e9tricas generales del sistema:\nsesiones totales, usuarios por sesi\u00f3n y juegos."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"total_sessions\": 5,\n  \"total_users_in_sessions\": 25,\n  \"users_per_session\": [5, 10, 3, 7, 0],\n  \"games_per_session\": [2, 4, 1, 3, 0],\n  \"users_per_game\": [4, 6, 2, 5, 0]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Estad\u00edsticas de una sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/zassessions\/:id\/stats",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/zassessions\/:id\/stats",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1562",
+                                    "description": "The ID of the zassession."
+                                },
+                                {
+                                    "id": "session_id",
+                                    "key": "session_id",
+                                    "value": "17",
+                                    "description": "ID de la sesi\u00f3n. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve informaci\u00f3n agregada de una sesi\u00f3n:\nn\u00famero de usuarios, plazas disponibles, si est\u00e1 llena, etc."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"session_id\": 1,\n  \"session_name\": \"Sesi\u00f3n Viernes\",\n  \"max_users\": 10,\n  \"users_count\": 5,\n  \"available_slots\": 5,\n  \"is_full\": false,\n  \"start_time\": \"18:00:00\",\n  \"end_time\": \"23:00:00\",\n  \"games_count\": 3\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Tipos",
+            "description": "",
+            "item": [
+                {
+                    "name": "Listar tipos",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/types",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/types"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve todos los tipos disponibles."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"type\": \"Tipo A\",\n    \"description\": \"Descripci\u00f3n del tipo A\"\n  }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener detalle de un tipo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/types\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/types\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del tipo. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve la informaci\u00f3n completa de un tipo espec\u00edfico."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"type\": \"Tipo A\",\n  \"description\": \"Descripci\u00f3n del tipo A\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear tipo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/types",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/types"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"type\":\"consequatur\",\"description\":\"Dolores dolorum amet iste laborum eius est dolor.\"}"
+                        },
+                        "description": "Crea un nuevo tipo con nombre y descripci\u00f3n."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"id\": 1,\n  \"type\": \"Tipo A\",\n  \"description\": \"Descripci\u00f3n del tipo A\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"Validation Error\",\n  \"errors\": {\n    \"type\": [\n      \"The type field is required.\"\n    ],\n    \"description\": [\n      \"The description field is required.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar tipo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/types\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/types\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del tipo. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"type\":\"consequatur\",\"description\":\"Dolores dolorum amet iste laborum eius est dolor.\"}"
+                        },
+                        "description": "Actualiza los datos de un tipo existente."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"type\": \"Tipo A\",\n  \"description\": \"Descripci\u00f3n del tipo A\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"Validation Error\",\n  \"errors\": {\n    \"type\": [\n      \"The type field must be a string.\"\n    ],\n    \"description\": [\n      \"The description field must be a string.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Eliminar tipo",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/types\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/types\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del tipo. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Elimina un tipo del sistema."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Type deleted\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Usuarios",
+            "description": "",
+            "item": [
+                {
+                    "name": "Listar usuarios",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve todos los usuarios registrados."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"num_partner\": 123,\n    \"nickname\": \"john_doe\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\"\n  }\n]",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Detalle de un usuario",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del usuario. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve la informaci\u00f3n de un usuario espec\u00edfico."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"id\": 1,\n    \"num_partner\": 123,\n    \"nickname\": \"john_doe\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"User Not autenticated\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear usuarios",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"num_partner\":17,\"nickname\":\"consequatur\",\"name\":\"consequatur\",\"password\":\"O[2UZ5ij-e\\\/dl4m{o,\",\"type\":\"consequatur\",\"registration_date\":\"consequatur\",\"email\":\"qkunze@example.com\",\"telephone\":\"consequatur\",\"age\":17,\"language\":\"consequatur\"}"
+                        },
+                        "description": "Crea un nuevo usuario en la aplicaci\u00f3n."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"token\": \"eyJ0eXAiOiJKV1QiLC\",\n \"user\": {\n   \"id\": 1,\n   \"num_partner\": 123,\n   \"nickname\": \"john_doe\",\n   \"name\": \"John Doe\",\n   \"email\": \"john.doe@example.com\"\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"User Not autenticated\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"num_partner\": [\n      \"The num partner field is required.\"\n    ],\n    \"nickname\": [\n      \"The nickname field is required.\"\n    ],\n    \"name\": [\n      \"The name field is required.\"\n    ],\n    \"password\": [\n      \"The password field is required.\"\n    ],\n    \"type\": [\n      \"The type field is required.\"\n    ],\n    \"registration_date\": [\n      \"The registration date field is required.\"\n    ],\n    \"age\": [\n      \"The age field is required.\"\n    ],\n    \"language\": [\n      \"The language field is required.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar usuarios",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del usuario. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"num_partner\":17,\"nickname\":\"consequatur\",\"name\":\"consequatur\",\"password\":\"O[2UZ5ij-e\\\/dl4m{o,\",\"type\":\"consequatur\",\"registration_date\":\"consequatur\",\"withdrawal_date\":\"2026-04-25T22:28:32\",\"email\":\"qkunze@example.com\",\"telephone\":\"consequatur\",\"age\":17,\"language\":\"consequatur\"}"
+                        },
+                        "description": "Actualiza la informaci\u00f3n de un usuario espec\u00edfico."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"num_partner\": 123,\n  \"nickname\": \"john_doe\",\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"User Not autenticated\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"num_partner\": [\n      \"The num partner must be an integer.\"\n    ],\n    \"nickname\": [\n      \"The nickname must be a string.\"\n    ],\n    \"name\": [\n      \"The name must be a string.\"\n    ],\n    \"password\": [\n      \"The password must be at least 6 characters.\"\n    ],\n    \"type\": [\n      \"The type must be one of: admin, junta, partner, guest.\"\n    ],\n    \"registration_date\": [\n      \"The registration date is not a valid date.\"\n    ],\n    \"email\": [\n      \"The email must be a valid email address.\"\n    ],\n    \"telephone\": [\n      \"The telephone must be a string.\"\n    ],\n    \"age\": [\n      \"The age must be an integer.\"\n    ],\n    \"language\": [\n      \"The language must be one of: en, es, ca.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Dar de baja a un usuario",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "17",
+                                    "description": "El ID del usuario. Ejemplo: 1"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Marca a un usuario como dado de baja en la aplicaci\u00f3n."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"User deleted\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"User Not autenticated\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"Forbidden\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "apikey",
+        "apikey": [
+            {
+                "key": "in",
+                "value": "header",
+                "type": "string"
+            },
+            {
+                "key": "key",
+                "value": "authorization",
+                "type": "string"
+            }
+        ]
+    }
+}

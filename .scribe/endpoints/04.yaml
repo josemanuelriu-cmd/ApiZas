@@ -1,0 +1,1150 @@
+name: Sesiones
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/zassessions
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Listar sesiones'
+      description: 'Devuelve todas las sesiones de juego disponibles.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          [
+            {
+              "id": 1,
+              "name": "Sesión Viernes",
+              "event_name": "Noche de juegos",
+              "date": "2026-04-10",
+              "max_users": 10
+           }
+          ]
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/zassessions/{id}'
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener detalle de una sesión'
+      description: 'Devuelve la información completa de una sesión específica.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'El ID de la sesión. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "name": "Sesión Viernes",
+            "event_name": "Noche de juegos",
+            "date": "2026-04-10",
+            "max_users": 10
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/zassessions
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Crear sesión'
+      description: 'Crea una nueva sesión de juego con límite de jugadores y localización.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'El nombre de la sesión. Ejemplo: Sesión Viernes'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      event_name:
+        custom: []
+        name: event_name
+        description: 'El nombre del evento. Ejemplo: Noche de juegos'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      date:
+        custom: []
+        name: date
+        description: 'La fecha de la sesión. Ejemplo: 2026-04-10'
+        required: true
+        example: consequatur
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      start_time:
+        custom: []
+        name: start_time
+        description: 'La hora de inicio de la sesión. Ejemplo: 18:00:00'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      end_time:
+        custom: []
+        name: end_time
+        description: 'La hora de fin de la sesión. Ejemplo: 22:00:00'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      max_users:
+        custom: []
+        name: max_users
+        description: 'El número máximo de usuarios permitidos. Ejemplo: 10'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      direction:
+        custom: []
+        name: direction
+        description: 'La dirección de la sesión. Ejemplo: Calle Principal 123'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      latitude:
+        custom: []
+        name: latitude
+        description: 'La latitud de la ubicación. Ejemplo: 40.7128'
+        required: true
+        example: consequatur
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      longitude:
+        custom: []
+        name: longitude
+        description: 'La longitud de la ubicación. Ejemplo: -74.0060'
+        required: true
+        example: consequatur
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: consequatur
+      event_name: consequatur
+      date: consequatur
+      start_time: consequatur
+      end_time: consequatur
+      max_users: 17
+      direction: consequatur
+      latitude: consequatur
+      longitude: consequatur
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "id": 1,
+            "name": "Sesión Viernes",
+            "event_name": "Noche de juegos",
+            "date": "2026-04-10",
+            "max_users": 10
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "Forbidden"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "User Not Found"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+           "errors": {
+             "name": [
+               "El nombre es obligatorio."
+             ],
+             "event_name": [
+               "El nombre del evento es obligatorio."
+             ],
+             "date": [
+               "La fecha es obligatoria."
+             ],
+             "start_time": [
+               "La hora de inicio es obligatoria."
+             ],
+             "end_time": [
+               "La hora de fin es obligatoria."
+             ],
+             "max_users": [
+               "El número máximo de usuarios es obligatorio."
+             ],
+             "direction": [
+               "La dirección es obligatoria."
+             ],
+             "latitude": [
+               "La latitud es obligatoria."
+             ],
+             "longitude": [
+               "La longitud es obligatoria."
+             ]
+           }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/zassessions/{id}'
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Actualizar sesión'
+      description: 'Actualiza los datos de una sesión existente.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'El ID de la sesión. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'optional El nombre de la sesión. Ejemplo: Sesión Viernes'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      event_name:
+        custom: []
+        name: event_name
+        description: 'optional El nombre del evento. Ejemplo: Noche de juegos'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      date:
+        custom: []
+        name: date
+        description: 'optional La fecha de la sesión. Ejemplo: 2026-04-10'
+        required: false
+        example: consequatur
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      start_time:
+        custom: []
+        name: start_time
+        description: 'optional La hora de inicio de la sesión. Ejemplo: 18:00:00'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      end_time:
+        custom: []
+        name: end_time
+        description: 'optional La hora de fin de la sesión. Ejemplo: 22:00:00'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      max_users:
+        custom: []
+        name: max_users
+        description: 'optional El número máximo de usuarios permitidos. Ejemplo: 10'
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      direction:
+        custom: []
+        name: direction
+        description: 'optional La dirección de la sesión. Ejemplo: Calle Principal 123'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      latitude:
+        custom: []
+        name: latitude
+        description: 'optional La latitud de la ubicación. Ejemplo: 40.7128'
+        required: false
+        example: consequatur
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      longitude:
+        custom: []
+        name: longitude
+        description: 'optional La longitud de la ubicación. Ejemplo: -74.0060'
+        required: false
+        example: consequatur
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: consequatur
+      event_name: consequatur
+      date: consequatur
+      start_time: consequatur
+      end_time: consequatur
+      max_users: 17
+      direction: consequatur
+      latitude: consequatur
+      longitude: consequatur
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "name": "Sesión Viernes",
+            "event_name": "Noche de juegos",
+            "date": "2026-04-10",
+            "max_users": 10
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "Forbidden"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+             "name": [
+               "El nombre es obligatorio."
+             ],
+             "event_name": [
+               "El nombre del evento es obligatorio."
+             ],
+             "date": [
+               "La fecha es obligatoria."
+             ],
+             "start_time": [
+               "La hora de inicio es obligatoria."
+             ],
+             "end_time": [
+               "La hora de fin es obligatoria."
+             ],
+             "max_users": [
+               "El número máximo de usuarios es obligatorio."
+             ],
+             "direction": [
+               "La dirección es obligatoria."
+             ],
+             "latitude": [
+               "La latitud es obligatoria."
+             ],
+             "longitude": [
+               "La longitud es obligatoria."
+             ]
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/zassessions/{id}'
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Eliminar sesión'
+      description: 'Elimina una sesión del sistema.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'El ID de la sesión. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Zassession deleted"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "Forbidden"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/zassessions/{id}/join'
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Unirse a una sesión'
+      description: 'Permite al usuario autenticado unirse a una sesión si hay plazas disponibles.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the zassession.'
+        required: true
+        example: '1562'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      session_id:
+        custom: []
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: '1562'
+      session_id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "User joined the session"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 409
+        content: |-
+          {
+            "message": "Session is full"
+          }
+        headers: []
+        description: 'Sesión llena'
+      -
+        custom: []
+        status: 409
+        content: |-
+          {
+            "message": "User already joined this session"
+          }
+        headers: []
+        description: 'Usuario ya inscrito'
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/zassessions/{id}/leave'
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Salir de una sesión'
+      description: 'Permite al usuario abandonar una sesión en la que está inscrito.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the zassession.'
+        required: true
+        example: '1562'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      session_id:
+        custom: []
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: '1562'
+      session_id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "User left the session"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Session Not Found"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 409
+        content: |-
+          {
+            "message": "User is not joined to this session"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/zassessions/{id}/users'
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener usuarios de una sesión'
+      description: 'Devuelve todos los usuarios que se han unido a una sesión.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the zassession.'
+        required: true
+        example: '1562'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      session_id:
+        custom: []
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: '1562'
+      session_id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          [
+            {
+              "id": 1,
+              "num_partner": 123,
+              "nickname": "john_doe",
+              "name": "John Doe",
+              "email": "john.doe@example.com"
+            }
+          ]
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+            "message": "No users joined to this session"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/zassessions/stats
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Estadísticas globales'
+      description: |-
+        Devuelve métricas generales del sistema:
+        sesiones totales, usuarios por sesión y juegos.
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "total_sessions": 5,
+            "total_users_in_sessions": 25,
+            "users_per_session": [5, 10, 3, 7, 0],
+            "games_per_session": [2, 4, 1, 3, 0],
+            "users_per_game": [4, 6, 2, 5, 0]
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "Forbidden"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/zassessions/{id}/stats'
+    metadata:
+      custom: []
+      groupName: Sesiones
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Estadísticas de una sesión'
+      description: |-
+        Devuelve información agregada de una sesión:
+        número de usuarios, plazas disponibles, si está llena, etc.
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the zassession.'
+        required: true
+        example: '1562'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      session_id:
+        custom: []
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: '1562'
+      session_id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "session_id": 1,
+            "session_name": "Sesión Viernes",
+            "max_users": 10,
+            "users_count": 5,
+            "available_slots": 5,
+            "is_full": false,
+            "start_time": "18:00:00",
+            "end_time": "23:00:00",
+            "games_count": 3
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "Forbidden"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
