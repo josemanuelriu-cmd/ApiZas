@@ -20,12 +20,14 @@ class ZassessionFactory extends Factory
      */
     public function definition(): array
     {
+        $startHour = $this->faker->numberBetween(8, 18);
+        $endHour = $this->faker->numberBetween($startHour + 1, 23);
         return [            
             'name' => $this->faker->unique()->name(),
             'event_name' => $this->faker->name(),
-            'date' => $this->faker->date(),
-            'start_time' => $this->faker->time(),
-            'end_time' => $this->faker->time(),
+            'date' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),            
+            'start_time' => sprintf('%02d:00:00', $startHour),
+            'end_time'   => sprintf('%02d:00:00', $endHour),
             'max_users' => $this->faker->numberBetween(1, 100),
             'direction' => $this->faker->address(),
             'latitude' => $this->faker->latitude(),
