@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\BoardgameController;
+use App\Http\Controllers\ZassessionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +61,35 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('/{id}', [BoardgameController::class, 'destroy'])
             ->middleware('role:admin,junta')
             ->where('id', '[0-9]+'); 
+    });
+
+    //Zassessions
+    Route::prefix('v1/zassessions')->group(function () {
+        Route::get('', [ZassessionController::class, 'index']); 
+        Route::get('/{id}', [ZassessionController::class, 'detail'])->where('id', '[0-9]+');
+        Route::post('', [ZassessionController::class, 'store'])
+            ->middleware('role:admin,junta'); 
+        Route::put('/{id}', [ZassessionController::class, 'update'])
+            ->middleware('role:admin,junta')
+            ->where('id', '[0-9]+'); 
+        Route::delete('/{id}', [ZassessionController::class, 'destroy'])
+            ->middleware('role:admin,junta')
+            ->where('id', '[0-9]+'); 
+        Route::post('/{id}/join', [ZassessionController::class, 'join'])->where('id', '[0-9]+'); 
+        Route::delete('/{id}/leave', [ZassessionController::class, 'leave'])->where('id', '[0-9]+'); 
+        Route::get('/{id}/users', [ZassessionController::class, 'getUsers'])->where('id', '[0-9]+'); 
+        Route::get('/stats', [ZassessionController::class, 'allstats'])
+            ->middleware('role:admin,junta,partner'); 
+        Route::get('/{id}/stats', [ZassessionController::class, 'sessionStats'])
+            ->middleware('role:admin,junta,partner')
+            ->where('id', '[0-9]+'); 
+
+        //necesita games
+        /*
+        Route::get('/{id}/games', [GameController::class, 'indexSession'])
+            ->middleware('role:admin,junta,partner,guest')
+            ->where('id', '[0-9]+'); 
+        */
     });
     
 });
