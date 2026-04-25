@@ -367,9 +367,6 @@ class GameController extends Controller
     * @response 401 {
     *   "message": "User not autenticated"
     * }
-    * @response 403 {
-    *   "message": "Forbidden"
-    * }
     * @response 404 {
     *   "message": "Not Found"
     * }

@@ -74,9 +74,6 @@ class UserController extends Controller
      * @response 401 {
      *   "message": "Unauthorized"
      * }
-     * @response 404 {
-     *   "message": "User Not autenticated"
-     * }
      */
     public function logout(Request $request): JsonResponse
     {
@@ -106,9 +103,6 @@ class UserController extends Controller
      *    "name": "John Doe",
      *    "email": "john.doe@example.com"
      *   }
-     * }
-     * @response 404 {
-     *   "message": "User Not autenticated"
      * }
      * @response 422 scenario="Datos inválidos" {
      *   "message": "The given data was invalid.",
@@ -196,9 +190,6 @@ class UserController extends Controller
      * ]
      * @response 401 {
      *   "message": "Unauthorized"
-     * }
-     * @response 404 {
-     *   "message": "User Not autenticated"
      * }
      *   
      */

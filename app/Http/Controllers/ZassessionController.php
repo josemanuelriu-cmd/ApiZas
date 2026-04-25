@@ -292,9 +292,6 @@ class ZassessionController extends Controller
      * @response 401 {
      *   "message": "Unauthorized"
      * }
-     * @response 403 {
-     *   "message": "Forbidden"
-     * }
      * @response 404 {
      *   "message": "Not Found"
      * }     
@@ -353,9 +350,6 @@ class ZassessionController extends Controller
      * @response 401 {
      *   "message": "Unauthorized"
      * }
-     * @response 403 {
-     *   "message": "Forbidden"
-     * }
      * @response 404 {
      *   "message": "Session Not Found"
      * }     
@@ -408,9 +402,6 @@ class ZassessionController extends Controller
      * }
      * @response 401 {
      *   "message": "Unauthorized"
-     * }
-     * @response 403 {
-     *   "message": "Forbidden"
      * }
      * @response 404 {
      *   "message": "Not Found"
