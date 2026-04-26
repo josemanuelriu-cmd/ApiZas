@@ -1,0 +1,3812 @@
+openapi: 3.0.3
+info:
+  title: 'APIZAS API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+tags:
+  -
+    name: Autenticación
+    description: ''
+  -
+    name: 'Juegos de mesa'
+    description: ''
+  -
+    name: Partidas
+    description: ''
+  -
+    name: Sesiones
+    description: ''
+  -
+    name: Tipos
+    description: ''
+  -
+    name: Usuarios
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: apiKey
+      name: authorization
+      in: header
+      description: 'Obtén tu token llamando al endpoint /api/v1/login.'
+security:
+  -
+    default: []
+paths:
+  /api/v1/login:
+    post:
+      summary: 'Iniciar sesión en la aplicación.'
+      operationId: iniciarSesinEnLaAplicacin
+      description: 'Logea al usuario en la aplicación.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9!
+                  user:
+                    id: 1
+                    num_partner: 123
+                    nickname: john_doe
+                    name: 'John Doe'
+                    email: john.doe@example.com
+                properties:
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9!
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      num_partner:
+                        type: integer
+                        example: 123
+                      nickname:
+                        type: string
+                        example: john_doe
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: john.doe@example.com
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User not autenticated'
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'El correo electrónico del usuario. Ejemplo: john.doe@example.com'
+                  example: qkunze@example.com
+                password:
+                  type: string
+                  description: 'La contraseña del usuario. Ejemplo: secret123'
+                  example: 'O[2UZ5ij-e/dl4m{o,'
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/register:
+    post:
+      summary: 'Registrar un nuevo usuario.'
+      operationId: registrarUnNuevoUsuario
+      description: 'Crea un nuevo usuario en la aplicación.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  token: eyJ0eXAiOiJKV1QiLC
+                  user:
+                    id: 1
+                    num_partner: 123
+                    nickname: john_doe
+                    name: 'John Doe'
+                    email: john.doe@example.com
+                properties:
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLC
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      num_partner:
+                        type: integer
+                        example: 123
+                      nickname:
+                        type: string
+                        example: john_doe
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: john.doe@example.com
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: 'Invalid data'
+                    type: object
+                    example:
+                      message: 'The given data was invalid.'
+                      errors:
+                        email:
+                          - 'The email field is required.'
+                        password:
+                          - 'The password field is required.'
+                    properties:
+                      message:
+                        type: string
+                        example: 'The given data was invalid.'
+                      errors:
+                        type: object
+                        properties:
+                          email:
+                            type: array
+                            example:
+                              - 'The email field is required.'
+                            items:
+                              type: string
+                          password:
+                            type: array
+                            example:
+                              - 'The password field is required.'
+                            items:
+                              type: string
+                  -
+                    description: 'Email already registered'
+                    type: object
+                    example:
+                      message: 'The email has already been taken.'
+                      errors:
+                        email:
+                          - 'The email has already been taken.'
+                    properties:
+                      message:
+                        type: string
+                        example: 'The email has already been taken.'
+                      errors:
+                        type: object
+                        properties:
+                          email:
+                            type: array
+                            example:
+                              - 'The email has already been taken.'
+                            items:
+                              type: string
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                num_partner:
+                  type: integer
+                  description: ''
+                  example: 17
+                  nullable: true
+                nickname:
+                  type: string
+                  description: ''
+                  example: consequatur
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: mqeopfuudtdsufvyvddqa
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: eloisa.harber@example.com
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: '[*UyPJ"}6'
+                type:
+                  type: string
+                  description: ''
+                  example: junta
+                  enum:
+                    - admin
+                    - junta
+                    - partner
+                    - guest
+                registration_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2026-04-26T10:37:43'
+                telephone:
+                  type: string
+                  description: ''
+                  example: consequatur
+                  nullable: true
+                age:
+                  type: integer
+                  description: ''
+                  example: 17
+                language:
+                  type: string
+                  description: ''
+                  example: ca
+                  enum:
+                    - en
+                    - es
+                    - ca
+              required:
+                - nickname
+                - name
+                - email
+                - password
+                - type
+                - registration_date
+                - age
+                - language
+      security: []
+  /api/v1/logout:
+    post:
+      summary: 'Cerrar sesión en la aplicación.'
+      operationId: cerrarSesinEnLaAplicacin
+      description: 'Saca al usuario de la aplicación.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Logged out successfully'
+                properties:
+                  message:
+                    type: string
+                    example: 'Logged out successfully'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Autenticación
+  /api/v1/boardgames:
+    get:
+      summary: 'Listar juegos de mesa'
+      operationId: listarJuegosDeMesa
+      description: 'Devuelve todos los juegos de mesa disponibles.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: 'Juego A'
+                    slug:
+                      type: string
+                      example: juego-a
+                    min_players:
+                      type: integer
+                      example: 2
+                    max_players:
+                      type: integer
+                      example: 10
+                    min_age:
+                      type: integer
+                      example: 8
+                    duration:
+                      type: integer
+                      example: 60
+                    description:
+                      type: string
+                      example: 'Descripción del juego A'
+                example:
+                  -
+                    id: 1
+                    name: 'Juego A'
+                    slug: juego-a
+                    min_players: 2
+                    max_players: 10
+                    min_age: 8
+                    duration: 60
+                    description: 'Descripción del juego A'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - 'Juegos de mesa'
+    post:
+      summary: 'Crear juego de mesa'
+      operationId: crearJuegoDeMesa
+      description: 'Crea un nuevo juego de mesa con los datos proporcionados.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Juego A'
+                  slug: juego-a
+                  min_players: 2
+                  max_players: 10
+                  min_age: 8
+                  duration: 60
+                  description: 'Descripción del juego A'
+                  owner_user_id: null
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Juego A'
+                  slug:
+                    type: string
+                    example: juego-a
+                  min_players:
+                    type: integer
+                    example: 2
+                  max_players:
+                    type: integer
+                    example: 10
+                  min_age:
+                    type: integer
+                    example: 8
+                  duration:
+                    type: integer
+                    example: 60
+                  description:
+                    type: string
+                    example: 'Descripción del juego A'
+                  owner_user_id:
+                    type: string
+                    example: null
+                    nullable: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    name:
+                      - 'The name field is required.'
+                    min_players:
+                      - 'The min players field is required.'
+                    max_players:
+                      - 'The max players field is required.'
+                    min_age:
+                      - 'The min age field is required.'
+                    duration:
+                      - 'The duration field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name field is required.'
+                        items:
+                          type: string
+                      min_players:
+                        type: array
+                        example:
+                          - 'The min players field is required.'
+                        items:
+                          type: string
+                      max_players:
+                        type: array
+                        example:
+                          - 'The max players field is required.'
+                        items:
+                          type: string
+                      min_age:
+                        type: array
+                        example:
+                          - 'The min age field is required.'
+                        items:
+                          type: string
+                      duration:
+                        type: array
+                        example:
+                          - 'The duration field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Juegos de mesa'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'El nombre del juego de mesa. Ejemplo: Juego A'
+                  example: consequatur
+                slug:
+                  type: string
+                  description: 'optional El slug del juego de mesa. Ejemplo: juego-a'
+                  example: consequatur
+                  nullable: true
+                min_players:
+                  type: integer
+                  description: 'El número mínimo de jugadores. Ejemplo: 2'
+                  example: 17
+                max_players:
+                  type: integer
+                  description: 'El número máximo de jugadores. Ejemplo: 10'
+                  example: 17
+                min_age:
+                  type: integer
+                  description: 'La edad mínima recomendada. Ejemplo: 8'
+                  example: 17
+                duration:
+                  type: integer
+                  description: 'La duración aproximada en minutos. Ejemplo: 60'
+                  example: 17
+                description:
+                  type: string
+                  description: 'optional La descripción del juego de mesa. Ejemplo: Descripción del juego A'
+                  example: 'Dolores dolorum amet iste laborum eius est dolor.'
+                  nullable: true
+                owner_user_id:
+                  type: integer
+                  description: 'optional El ID del usuario propietario del juego de mesa. Ejemplo: 1'
+                  example: 17
+                  nullable: true
+                types:
+                  type: array
+                  description: 'optional El array de IDs de tipos asociados al juego de mesa. Ejemplo: [1, 2]'
+                  example:
+                    - 17
+                  items:
+                    type: integer
+              required:
+                - name
+                - min_players
+                - max_players
+                - min_age
+                - duration
+  '/api/v1/boardgames/{id}':
+    get:
+      summary: 'Obtener detalle de un juego de mesa'
+      operationId: obtenerDetalleDeUnJuegoDeMesa
+      description: 'Devuelve la información completa de un juego de mesa específico.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Juego A'
+                  slug: juego-a
+                  min_players: 2
+                  max_players: 10
+                  min_age: 8
+                  duration: 60
+                  description: 'Descripción del juego A'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Juego A'
+                  slug:
+                    type: string
+                    example: juego-a
+                  min_players:
+                    type: integer
+                    example: 2
+                  max_players:
+                    type: integer
+                    example: 10
+                  min_age:
+                    type: integer
+                    example: 8
+                  duration:
+                    type: integer
+                    example: 60
+                  description:
+                    type: string
+                    example: 'Descripción del juego A'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - 'Juegos de mesa'
+    put:
+      summary: 'Actualizar juego de mesa'
+      operationId: actualizarJuegoDeMesa
+      description: 'Actualiza la información de un juego de mesa específico.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Juego A'
+                  slug: juego-a
+                  min_players: 2
+                  max_players: 10
+                  min_age: 8
+                  duration: 60
+                  description: 'Descripción del juego A'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Juego A'
+                  slug:
+                    type: string
+                    example: juego-a
+                  min_players:
+                    type: integer
+                    example: 2
+                  max_players:
+                    type: integer
+                    example: 10
+                  min_age:
+                    type: integer
+                    example: 8
+                  duration:
+                    type: integer
+                    example: 60
+                  description:
+                    type: string
+                    example: 'Descripción del juego A'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    name:
+                      - 'The name field is required.'
+                    min_players:
+                      - 'The min players field is required.'
+                    max_players:
+                      - 'The max players field is required.'
+                    min_age:
+                      - 'The min age field is required.'
+                    duration:
+                      - 'The duration field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name field is required.'
+                        items:
+                          type: string
+                      min_players:
+                        type: array
+                        example:
+                          - 'The min players field is required.'
+                        items:
+                          type: string
+                      max_players:
+                        type: array
+                        example:
+                          - 'The max players field is required.'
+                        items:
+                          type: string
+                      min_age:
+                        type: array
+                        example:
+                          - 'The min age field is required.'
+                        items:
+                          type: string
+                      duration:
+                        type: array
+                        example:
+                          - 'The duration field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Juegos de mesa'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'optional El nombre del juego de mesa. Ejemplo: Juego A'
+                  example: consequatur
+                slug:
+                  type: string
+                  description: 'optional El slug del juego de mesa. Ejemplo: juego-a'
+                  example: consequatur
+                min_players:
+                  type: integer
+                  description: 'optional El número mínimo de jugadores. Ejemplo: 2'
+                  example: 17
+                max_players:
+                  type: integer
+                  description: 'optional El número máximo de jugadores. Ejemplo: 10'
+                  example: 17
+                min_age:
+                  type: integer
+                  description: 'optional La edad mínima recomendada. Ejemplo: 8'
+                  example: 17
+                duration:
+                  type: integer
+                  description: 'optional La duración aproximada en minutos. Ejemplo: 60'
+                  example: 17
+                description:
+                  type: string
+                  description: 'optional La descripción del juego de mesa. Ejemplo: Descripción del juego A'
+                  example: 'Dolores dolorum amet iste laborum eius est dolor.'
+                owner_user_id:
+                  type: integer
+                  description: 'optional El ID del usuario propietario del juego de mesa. Ejemplo: 1'
+                  example: 17
+                  nullable: true
+                types:
+                  type: array
+                  description: 'optional El array de IDs de tipos asociados al juego de mesa. Ejemplo: [1, 2]'
+                  example:
+                    - 17
+                  items:
+                    type: integer
+    delete:
+      summary: 'Eliminar juego de mesa'
+      operationId: eliminarJuegoDeMesa
+      description: 'Elimina un juego de mesa del sistema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Boardgame deleted'
+                properties:
+                  message:
+                    type: string
+                    example: 'Boardgame deleted'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - 'Juegos de mesa'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'El ID del juego de mesa. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/zassessions/{id}/games':
+    get:
+      summary: 'Listar partidas de una sesión'
+      operationId: listarPartidasDeUnaSesin
+      description: 'Devuelve todas las partidas disponibles de una sesión específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    zassession_id:
+                      type: integer
+                      example: 1
+                    boardgame_id:
+                      type: integer
+                      example: 1
+                    host_user_id:
+                      type: integer
+                      example: 1
+                    max_players:
+                      type: integer
+                      example: 10
+                    start_time:
+                      type: string
+                      example: '14:30:00'
+                    status:
+                      type: string
+                      example: open
+                    necesary_know_how:
+                      type: boolean
+                      example: true
+                example:
+                  -
+                    id: 1
+                    zassession_id: 1
+                    boardgame_id: 1
+                    host_user_id: 1
+                    max_players: 10
+                    start_time: '14:30:00'
+                    status: open
+                    necesary_know_how: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Partidas
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the zassession.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: session_id
+        description: 'El ID de la sesión. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/v1/games:
+    get:
+      summary: 'Listar todas las partidas'
+      operationId: listarTodasLasPartidas
+      description: 'Devuelve todas las partidas disponibles.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    zassession_id:
+                      type: integer
+                      example: 1
+                    boardgame_id:
+                      type: integer
+                      example: 1
+                    host_user_id:
+                      type: integer
+                      example: 1
+                    max_players:
+                      type: integer
+                      example: 10
+                    start_time:
+                      type: string
+                      example: '14:30:00'
+                    status:
+                      type: string
+                      example: open
+                    necesary_know_how:
+                      type: boolean
+                      example: true
+                example:
+                  -
+                    id: 1
+                    zassession_id: 1
+                    boardgame_id: 1
+                    host_user_id: 1
+                    max_players: 10
+                    start_time: '14:30:00'
+                    status: open
+                    necesary_know_how: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Partidas
+    post:
+      summary: 'Crear partida'
+      operationId: crearPartida
+      description: 'Crea una nueva partida con los datos proporcionados.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  zassession_id: 1
+                  boardgame_id: 1
+                  host_user_id: 1
+                  max_players: 10
+                  start_time: '14:30:00'
+                  status: open
+                  necesary_know_how: true
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  zassession_id:
+                    type: integer
+                    example: 1
+                  boardgame_id:
+                    type: integer
+                    example: 1
+                  host_user_id:
+                    type: integer
+                    example: 1
+                  max_players:
+                    type: integer
+                    example: 10
+                  start_time:
+                    type: string
+                    example: '14:30:00'
+                  status:
+                    type: string
+                    example: open
+                  necesary_know_how:
+                    type: boolean
+                    example: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+      tags:
+        - Partidas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                zassession_id:
+                  type: integer
+                  description: 'El ID de la sesión a la que pertenece la partida. Ejemplo: 1'
+                  example: 17
+                boardgame_id:
+                  type: integer
+                  description: 'El ID del juego de mesa que se va a jugar. Ejemplo: 1'
+                  example: 17
+                host_user_id:
+                  type: integer
+                  description: 'El ID del usuario que será el anfitrión de la partida. Ejemplo: 1'
+                  example: 17
+                max_players:
+                  type: integer
+                  description: 'El número máximo de jugadores permitidos en la partida. Ejemplo: 10'
+                  example: 17
+                start_time:
+                  type: string
+                  description: 'La hora de inicio de la partida en formato HH:mm:ss. Ejemplo: 14:30:00'
+                  example: consequatur
+                status:
+                  type: string
+                  description: 'El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open'
+                  example: consequatur
+                necesary_know_how:
+                  type: boolean
+                  description: 'Indica si es necesario tener conocimientos previos para jugar la partida. Ejemplo: true'
+                  example: false
+              required:
+                - zassession_id
+                - boardgame_id
+                - host_user_id
+                - max_players
+                - start_time
+                - status
+                - necesary_know_how
+  '/api/v1/games/{id}':
+    get:
+      summary: 'Obtener detalle de una partida'
+      operationId: obtenerDetalleDeUnaPartida
+      description: 'Devuelve la información completa de una partida específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  zassession_id: 1
+                  boardgame_id: 1
+                  host_user_id: 1
+                  max_players: 10
+                  start_time: '14:30:00'
+                  status: open
+                  necesary_know_how: true
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  zassession_id:
+                    type: integer
+                    example: 1
+                  boardgame_id:
+                    type: integer
+                    example: 1
+                  host_user_id:
+                    type: integer
+                    example: 1
+                  max_players:
+                    type: integer
+                    example: 10
+                  start_time:
+                    type: string
+                    example: '14:30:00'
+                  status:
+                    type: string
+                    example: open
+                  necesary_know_how:
+                    type: boolean
+                    example: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Partidas
+    put:
+      summary: 'Actualizar partidas'
+      operationId: actualizarPartidas
+      description: 'Actualiza la información de una partida específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  zassession_id: 1
+                  boardgame_id: 1
+                  host_user_id: 1
+                  max_players: 10
+                  start_time: '14:30:00'
+                  status: limited
+                  necesary_know_how: true
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  zassession_id:
+                    type: integer
+                    example: 1
+                  boardgame_id:
+                    type: integer
+                    example: 1
+                  host_user_id:
+                    type: integer
+                    example: 1
+                  max_players:
+                    type: integer
+                    example: 10
+                  start_time:
+                    type: string
+                    example: '14:30:00'
+                  status:
+                    type: string
+                    example: limited
+                  necesary_know_how:
+                    type: boolean
+                    example: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Partidas
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                zassession_id:
+                  type: integer
+                  description: 'optional El ID de la sesión a la que pertenece la partida. Ejemplo: 1'
+                  example: 17
+                boardgame_id:
+                  type: integer
+                  description: 'optional El ID del juego de mesa que se va a jugar. Ejemplo: 1'
+                  example: 17
+                host_user_id:
+                  type: integer
+                  description: 'optional El ID del usuario que será el anfitrión de la partida. Ejemplo: 1'
+                  example: 17
+                max_players:
+                  type: integer
+                  description: 'optional El número máximo de jugadores permitidos en la partida. Ejemplo: 10'
+                  example: 17
+                start_time:
+                  type: string
+                  description: 'optional La hora de inicio de la partida en formato HH:mm:ss. Ejemplo: 14:30:00'
+                  example: consequatur
+                status:
+                  type: string
+                  description: 'optional El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open'
+                  example: consequatur
+                necesary_know_how:
+                  type: boolean
+                  description: 'optional Indica si es necesario tener conocimientos previos para jugar la partida. Ejemplo: true'
+                  example: false
+    delete:
+      summary: 'Eliminar partida'
+      operationId: eliminarPartida
+      description: 'Elimina una partida específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Game deleted'
+                properties:
+                  message:
+                    type: string
+                    example: 'Game deleted'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Partidas
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'El ID de la partida. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/games/{id}/join':
+    post:
+      summary: 'Unirse a partida'
+      operationId: unirseAPartida
+      description: 'Permite a un usuario unirse a una partida específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User joined the game'
+                properties:
+                  message:
+                    type: string
+                    example: 'User joined the game'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User not autenticated'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+        409:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: 'Game is full'
+                    type: object
+                    example:
+                      message: 'Game is full'
+                    properties:
+                      message:
+                        type: string
+                        example: 'Game is full'
+                  -
+                    description: 'User already joined this game'
+                    type: object
+                    example:
+                      message: 'User already joined this game'
+                    properties:
+                      message:
+                        type: string
+                        example: 'User already joined this game'
+      tags:
+        - Partidas
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the game.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: game_id
+        description: 'El ID de la partida. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/games/{id}/leave':
+    delete:
+      summary: 'Salir de una partida'
+      operationId: salirDeUnaPartida
+      description: 'Permite a un usuario salir de una partida específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User left the game'
+                properties:
+                  message:
+                    type: string
+                    example: 'User left the game'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User not autenticated'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+        409:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User is not joined to this game'
+                properties:
+                  message:
+                    type: string
+                    example: 'User is not joined to this game'
+      tags:
+        - Partidas
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the game.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: game_id
+        description: 'El ID de la partida. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/games/{id}/users':
+    get:
+      summary: 'Obtener jugadores de una partida'
+      operationId: obtenerJugadoresDeUnaPartida
+      description: 'Devuelve la lista de jugadores que se han unido a una partida específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    num_partner:
+                      type: integer
+                      example: 123
+                    name:
+                      type: string
+                      example: 'John Doe'
+                    nickname:
+                      type: string
+                      example: johnny
+                    email:
+                      type: string
+                      example: john.doe@example.com
+                example:
+                  -
+                    id: 1
+                    num_partner: 123
+                    name: 'John Doe'
+                    nickname: johnny
+                    email: john.doe@example.com
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No players joined to this game'
+                properties:
+                  message:
+                    type: string
+                    example: 'No players joined to this game'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User not autenticated'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Partidas
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the game.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: game_id
+        description: 'El ID de la partida. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/games/{id}/stats':
+    get:
+      summary: 'Estadísticas de una partida'
+      operationId: estadsticasDeUnaPartida
+      description: 'Devuelve las estadísticas de una partida específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  game_id: 1
+                  zassession_id: 1
+                  boardgame_id: 1
+                  host_user_id: 1
+                  max_players: 10
+                  total_players: 5
+                  start_time: '14:30:00'
+                  status: playing
+                  necesary_know_how: true
+                properties:
+                  game_id:
+                    type: integer
+                    example: 1
+                  zassession_id:
+                    type: integer
+                    example: 1
+                  boardgame_id:
+                    type: integer
+                    example: 1
+                  host_user_id:
+                    type: integer
+                    example: 1
+                  max_players:
+                    type: integer
+                    example: 10
+                  total_players:
+                    type: integer
+                    example: 5
+                  start_time:
+                    type: string
+                    example: '14:30:00'
+                  status:
+                    type: string
+                    example: playing
+                  necesary_know_how:
+                    type: boolean
+                    example: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Partidas
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the game.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: game_id
+        description: 'El ID de la partida. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/v1/zassessions:
+    get:
+      summary: 'Listar sesiones'
+      operationId: listarSesiones
+      description: 'Devuelve todas las sesiones de juego disponibles.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: 'Sesión Viernes'
+                    event_name:
+                      type: string
+                      example: 'Noche de juegos'
+                    date:
+                      type: string
+                      example: '2026-04-10'
+                    max_users:
+                      type: integer
+                      example: 10
+                example:
+                  -
+                    id: 1
+                    name: 'Sesión Viernes'
+                    event_name: 'Noche de juegos'
+                    date: '2026-04-10'
+                    max_users: 10
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Sesiones
+    post:
+      summary: 'Crear sesión'
+      operationId: crearSesin
+      description: 'Crea una nueva sesión de juego con límite de jugadores y localización.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Sesión Viernes'
+                  event_name: 'Noche de juegos'
+                  date: '2026-04-10'
+                  max_users: 10
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Sesión Viernes'
+                  event_name:
+                    type: string
+                    example: 'Noche de juegos'
+                  date:
+                    type: string
+                    example: '2026-04-10'
+                  max_users:
+                    type: integer
+                    example: 10
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'User Not Found'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    name:
+                      - 'The name field is required.'
+                    event_name:
+                      - 'The event name field is required.'
+                    date:
+                      - 'The date field is required.'
+                    start_time:
+                      - 'The start time field is required.'
+                    end_time:
+                      - 'The end time field is required.'
+                    max_users:
+                      - 'The max users field is required.'
+                    direction:
+                      - 'The direction field is required.'
+                    latitude:
+                      - 'The latitude field is required.'
+                    longitude:
+                      - 'The longitude field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name field is required.'
+                        items:
+                          type: string
+                      event_name:
+                        type: array
+                        example:
+                          - 'The event name field is required.'
+                        items:
+                          type: string
+                      date:
+                        type: array
+                        example:
+                          - 'The date field is required.'
+                        items:
+                          type: string
+                      start_time:
+                        type: array
+                        example:
+                          - 'The start time field is required.'
+                        items:
+                          type: string
+                      end_time:
+                        type: array
+                        example:
+                          - 'The end time field is required.'
+                        items:
+                          type: string
+                      max_users:
+                        type: array
+                        example:
+                          - 'The max users field is required.'
+                        items:
+                          type: string
+                      direction:
+                        type: array
+                        example:
+                          - 'The direction field is required.'
+                        items:
+                          type: string
+                      latitude:
+                        type: array
+                        example:
+                          - 'The latitude field is required.'
+                        items:
+                          type: string
+                      longitude:
+                        type: array
+                        example:
+                          - 'The longitude field is required.'
+                        items:
+                          type: string
+      tags:
+        - Sesiones
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'El nombre de la sesión. Ejemplo: Sesión Viernes'
+                  example: consequatur
+                event_name:
+                  type: string
+                  description: 'El nombre del evento. Ejemplo: Noche de juegos'
+                  example: consequatur
+                date:
+                  type: date
+                  description: 'La fecha de la sesión. Ejemplo: 2026-04-10'
+                  example: consequatur
+                start_time:
+                  type: string
+                  description: 'La hora de inicio de la sesión. Ejemplo: 18:00:00'
+                  example: consequatur
+                end_time:
+                  type: string
+                  description: 'La hora de fin de la sesión. Ejemplo: 22:00:00'
+                  example: consequatur
+                max_users:
+                  type: integer
+                  description: 'El número máximo de usuarios permitidos. Ejemplo: 10'
+                  example: 17
+                direction:
+                  type: string
+                  description: 'La dirección de la sesión. Ejemplo: Calle Principal 123'
+                  example: consequatur
+                latitude:
+                  type: numeric
+                  description: 'La latitud de la ubicación. Ejemplo: 40.7128'
+                  example: consequatur
+                longitude:
+                  type: numeric
+                  description: 'La longitud de la ubicación. Ejemplo: -74.0060'
+                  example: consequatur
+              required:
+                - name
+                - event_name
+                - date
+                - start_time
+                - end_time
+                - max_users
+                - direction
+                - latitude
+                - longitude
+  '/api/v1/zassessions/{id}':
+    get:
+      summary: 'Obtener detalle de una sesión'
+      operationId: obtenerDetalleDeUnaSesin
+      description: 'Devuelve la información completa de una sesión específica.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Sesión Viernes'
+                  event_name: 'Noche de juegos'
+                  date: '2026-04-10'
+                  max_users: 10
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Sesión Viernes'
+                  event_name:
+                    type: string
+                    example: 'Noche de juegos'
+                  date:
+                    type: string
+                    example: '2026-04-10'
+                  max_users:
+                    type: integer
+                    example: 10
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Sesiones
+    put:
+      summary: 'Actualizar sesión'
+      operationId: actualizarSesin
+      description: 'Actualiza los datos de una sesión existente.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Sesión Viernes'
+                  event_name: 'Noche de juegos'
+                  date: '2026-04-10'
+                  max_users: 10
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Sesión Viernes'
+                  event_name:
+                    type: string
+                    example: 'Noche de juegos'
+                  date:
+                    type: string
+                    example: '2026-04-10'
+                  max_users:
+                    type: integer
+                    example: 10
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    name:
+                      - 'The name field is required.'
+                    event_name:
+                      - 'The event name field is required.'
+                    date:
+                      - 'The date field is required.'
+                    start_time:
+                      - 'The start time field is required.'
+                    end_time:
+                      - 'The end time field is required.'
+                    max_users:
+                      - 'The max users field is required.'
+                    direction:
+                      - 'The direction field is required.'
+                    latitude:
+                      - 'The latitude field is required.'
+                    longitude:
+                      - 'The longitude field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name field is required.'
+                        items:
+                          type: string
+                      event_name:
+                        type: array
+                        example:
+                          - 'The event name field is required.'
+                        items:
+                          type: string
+                      date:
+                        type: array
+                        example:
+                          - 'The date field is required.'
+                        items:
+                          type: string
+                      start_time:
+                        type: array
+                        example:
+                          - 'The start time field is required.'
+                        items:
+                          type: string
+                      end_time:
+                        type: array
+                        example:
+                          - 'The end time field is required.'
+                        items:
+                          type: string
+                      max_users:
+                        type: array
+                        example:
+                          - 'The max users field is required.'
+                        items:
+                          type: string
+                      direction:
+                        type: array
+                        example:
+                          - 'The direction field is required.'
+                        items:
+                          type: string
+                      latitude:
+                        type: array
+                        example:
+                          - 'The latitude field is required.'
+                        items:
+                          type: string
+                      longitude:
+                        type: array
+                        example:
+                          - 'The longitude field is required.'
+                        items:
+                          type: string
+      tags:
+        - Sesiones
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'optional El nombre de la sesión. Ejemplo: Sesión Viernes'
+                  example: consequatur
+                event_name:
+                  type: string
+                  description: 'optional El nombre del evento. Ejemplo: Noche de juegos'
+                  example: consequatur
+                date:
+                  type: date
+                  description: 'optional La fecha de la sesión. Ejemplo: 2026-04-10'
+                  example: consequatur
+                start_time:
+                  type: string
+                  description: 'optional La hora de inicio de la sesión. Ejemplo: 18:00:00'
+                  example: consequatur
+                end_time:
+                  type: string
+                  description: 'optional La hora de fin de la sesión. Ejemplo: 22:00:00'
+                  example: consequatur
+                max_users:
+                  type: integer
+                  description: 'optional El número máximo de usuarios permitidos. Ejemplo: 10'
+                  example: 17
+                direction:
+                  type: string
+                  description: 'optional La dirección de la sesión. Ejemplo: Calle Principal 123'
+                  example: consequatur
+                latitude:
+                  type: numeric
+                  description: 'optional La latitud de la ubicación. Ejemplo: 40.7128'
+                  example: consequatur
+                longitude:
+                  type: numeric
+                  description: 'optional La longitud de la ubicación. Ejemplo: -74.0060'
+                  example: consequatur
+    delete:
+      summary: 'Eliminar sesión'
+      operationId: eliminarSesin
+      description: 'Elimina una sesión del sistema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Zassession deleted'
+                properties:
+                  message:
+                    type: string
+                    example: 'Zassession deleted'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Sesiones
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'El ID de la sesión. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/zassessions/{id}/join':
+    post:
+      summary: 'Unirse a una sesión'
+      operationId: unirseAUnaSesin
+      description: 'Permite al usuario autenticado unirse a una sesión si hay plazas disponibles.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User joined the session'
+                properties:
+                  message:
+                    type: string
+                    example: 'User joined the session'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+        409:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: 'Full Session'
+                    type: object
+                    example:
+                      message: 'Session is full'
+                    properties:
+                      message:
+                        type: string
+                        example: 'Session is full'
+                  -
+                    description: 'User already registered'
+                    type: object
+                    example:
+                      message: 'User already joined this session'
+                    properties:
+                      message:
+                        type: string
+                        example: 'User already joined this session'
+      tags:
+        - Sesiones
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the zassession.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/zassessions/{id}/leave':
+    delete:
+      summary: 'Salir de una sesión'
+      operationId: salirDeUnaSesin
+      description: 'Permite al usuario abandonar una sesión en la que está inscrito.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User left the session'
+                properties:
+                  message:
+                    type: string
+                    example: 'User left the session'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Session Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Session Not Found'
+        409:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User is not joined to this session'
+                properties:
+                  message:
+                    type: string
+                    example: 'User is not joined to this session'
+      tags:
+        - Sesiones
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the zassession.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  '/api/v1/zassessions/{id}/users':
+    get:
+      summary: 'Obtener usuarios de una sesión'
+      operationId: obtenerUsuariosDeUnaSesin
+      description: 'Devuelve todos los usuarios que se han unido a una sesión.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    num_partner:
+                      type: integer
+                      example: 123
+                    nickname:
+                      type: string
+                      example: john_doe
+                    name:
+                      type: string
+                      example: 'John Doe'
+                    email:
+                      type: string
+                      example: john.doe@example.com
+                example:
+                  -
+                    id: 1
+                    num_partner: 123
+                    nickname: john_doe
+                    name: 'John Doe'
+                    email: john.doe@example.com
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No users joined to this session'
+                properties:
+                  message:
+                    type: string
+                    example: 'No users joined to this session'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Sesiones
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the zassession.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/v1/zassessions/stats:
+    get:
+      summary: 'Estadísticas globales'
+      operationId: estadsticasGlobales
+      description: "Devuelve métricas generales del sistema:\nsesiones totales, usuarios por sesión y juegos."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  total_sessions: 5
+                  total_users_in_sessions: 25
+                  users_per_session:
+                    - 5
+                    - 10
+                    - 3
+                    - 7
+                    - 0
+                  games_per_session:
+                    - 2
+                    - 4
+                    - 1
+                    - 3
+                    - 0
+                  users_per_game:
+                    - 4
+                    - 6
+                    - 2
+                    - 5
+                    - 0
+                properties:
+                  total_sessions:
+                    type: integer
+                    example: 5
+                  total_users_in_sessions:
+                    type: integer
+                    example: 25
+                  users_per_session:
+                    type: array
+                    example:
+                      - 5
+                      - 10
+                      - 3
+                      - 7
+                      - 0
+                    items:
+                      type: integer
+                  games_per_session:
+                    type: array
+                    example:
+                      - 2
+                      - 4
+                      - 1
+                      - 3
+                      - 0
+                    items:
+                      type: integer
+                  users_per_game:
+                    type: array
+                    example:
+                      - 4
+                      - 6
+                      - 2
+                      - 5
+                      - 0
+                    items:
+                      type: integer
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+      tags:
+        - Sesiones
+  '/api/v1/zassessions/{id}/stats':
+    get:
+      summary: 'Estadísticas de una sesión'
+      operationId: estadsticasDeUnaSesin
+      description: "Devuelve información agregada de una sesión:\nnúmero de usuarios, plazas disponibles, si está llena, etc."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  session_id: 1
+                  session_name: 'Sesión Viernes'
+                  max_users: 10
+                  users_count: 5
+                  available_slots: 5
+                  is_full: false
+                  start_time: '18:00:00'
+                  end_time: '23:00:00'
+                  games_count: 3
+                properties:
+                  session_id:
+                    type: integer
+                    example: 1
+                  session_name:
+                    type: string
+                    example: 'Sesión Viernes'
+                  max_users:
+                    type: integer
+                    example: 10
+                  users_count:
+                    type: integer
+                    example: 5
+                  available_slots:
+                    type: integer
+                    example: 5
+                  is_full:
+                    type: boolean
+                    example: false
+                  start_time:
+                    type: string
+                    example: '18:00:00'
+                  end_time:
+                    type: string
+                    example: '23:00:00'
+                  games_count:
+                    type: integer
+                    example: 3
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Sesiones
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the zassession.'
+        example: '1562'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: session_id
+        description: 'ID de la sesión. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/v1/types:
+    get:
+      summary: 'Listar tipos'
+      operationId: listarTipos
+      description: 'Devuelve todos los tipos disponibles.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    type:
+                      type: string
+                      example: 'Tipo A'
+                    description:
+                      type: string
+                      example: 'Descripción del tipo A'
+                example:
+                  -
+                    id: 1
+                    type: 'Tipo A'
+                    description: 'Descripción del tipo A'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+      tags:
+        - Tipos
+    post:
+      summary: 'Crear tipo'
+      operationId: crearTipo
+      description: 'Crea un nuevo tipo con nombre y descripción.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  type: 'Tipo A'
+                  description: 'Descripción del tipo A'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  type:
+                    type: string
+                    example: 'Tipo A'
+                  description:
+                    type: string
+                    example: 'Descripción del tipo A'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Validation Error'
+                  errors:
+                    type:
+                      - 'The type field is required.'
+                    description:
+                      - 'The description field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Validation Error'
+                  errors:
+                    type: object
+                    properties:
+                      type:
+                        type: array
+                        example:
+                          - 'The type field is required.'
+                        items:
+                          type: string
+                      description:
+                        type: array
+                        example:
+                          - 'The description field is required.'
+                        items:
+                          type: string
+      tags:
+        - Tipos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 'El nombre del tipo. Ejemplo: Tipo A'
+                  example: consequatur
+                description:
+                  type: string
+                  description: 'La descripción del tipo. Ejemplo: Descripción del tipo A'
+                  example: 'Dolores dolorum amet iste laborum eius est dolor.'
+              required:
+                - type
+                - description
+  '/api/v1/types/{id}':
+    get:
+      summary: 'Obtener detalle de un tipo'
+      operationId: obtenerDetalleDeUnTipo
+      description: 'Devuelve la información completa de un tipo específico.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  type: 'Tipo A'
+                  description: 'Descripción del tipo A'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  type:
+                    type: string
+                    example: 'Tipo A'
+                  description:
+                    type: string
+                    example: 'Descripción del tipo A'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Tipos
+    put:
+      summary: 'Actualizar tipo'
+      operationId: actualizarTipo
+      description: 'Actualiza los datos de un tipo existente.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  type: 'Tipo A'
+                  description: 'Descripción del tipo A'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  type:
+                    type: string
+                    example: 'Tipo A'
+                  description:
+                    type: string
+                    example: 'Descripción del tipo A'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Validation Error'
+                  errors:
+                    type:
+                      - 'The type field must be a string.'
+                    description:
+                      - 'The description field must be a string.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Validation Error'
+                  errors:
+                    type: object
+                    properties:
+                      type:
+                        type: array
+                        example:
+                          - 'The type field must be a string.'
+                        items:
+                          type: string
+                      description:
+                        type: array
+                        example:
+                          - 'The description field must be a string.'
+                        items:
+                          type: string
+      tags:
+        - Tipos
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 'optional El nombre del tipo. Ejemplo: Tipo A'
+                  example: consequatur
+                description:
+                  type: string
+                  description: 'optional La descripción del tipo. Ejemplo: Descripción del tipo A'
+                  example: 'Dolores dolorum amet iste laborum eius est dolor.'
+    delete:
+      summary: 'Eliminar tipo'
+      operationId: eliminarTipo
+      description: 'Elimina un tipo del sistema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Type deleted'
+                properties:
+                  message:
+                    type: string
+                    example: 'Type deleted'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Tipos
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'El ID del tipo. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/v1/users:
+    get:
+      summary: 'Listar usuarios'
+      operationId: listarUsuarios
+      description: 'Devuelve todos los usuarios registrados.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    num_partner:
+                      type: integer
+                      example: 123
+                    nickname:
+                      type: string
+                      example: john_doe
+                    name:
+                      type: string
+                      example: 'John Doe'
+                    email:
+                      type: string
+                      example: john.doe@example.com
+                example:
+                  -
+                    id: 1
+                    num_partner: 123
+                    nickname: john_doe
+                    name: 'John Doe'
+                    email: john.doe@example.com
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Usuarios
+    post:
+      summary: 'Crear usuarios'
+      operationId: crearUsuarios
+      description: 'Crea un nuevo usuario en la aplicación.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  token: eyJ0eXAiOiJKV1QiLC
+                  user:
+                    id: 1
+                    num_partner: 123
+                    nickname: john_doe
+                    name: 'John Doe'
+                    email: john.doe@example.com
+                properties:
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLC
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      num_partner:
+                        type: integer
+                        example: 123
+                      nickname:
+                        type: string
+                        example: john_doe
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: john.doe@example.com
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User Not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User Not autenticated'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    num_partner:
+                      - 'The num partner field is required.'
+                    nickname:
+                      - 'The nickname field is required.'
+                    name:
+                      - 'The name field is required.'
+                    password:
+                      - 'The password field is required.'
+                    type:
+                      - 'The type field is required.'
+                    registration_date:
+                      - 'The registration date field is required.'
+                    age:
+                      - 'The age field is required.'
+                    language:
+                      - 'The language field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      num_partner:
+                        type: array
+                        example:
+                          - 'The num partner field is required.'
+                        items:
+                          type: string
+                      nickname:
+                        type: array
+                        example:
+                          - 'The nickname field is required.'
+                        items:
+                          type: string
+                      name:
+                        type: array
+                        example:
+                          - 'The name field is required.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+                      type:
+                        type: array
+                        example:
+                          - 'The type field is required.'
+                        items:
+                          type: string
+                      registration_date:
+                        type: array
+                        example:
+                          - 'The registration date field is required.'
+                        items:
+                          type: string
+                      age:
+                        type: array
+                        example:
+                          - 'The age field is required.'
+                        items:
+                          type: string
+                      language:
+                        type: array
+                        example:
+                          - 'The language field is required.'
+                        items:
+                          type: string
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                num_partner:
+                  type: integer
+                  description: 'nullable El número de socio del usuario. Ejemplo: 123'
+                  example: 17
+                  nullable: true
+                nickname:
+                  type: string
+                  description: 'El apodo del usuario. Ejemplo: john_doe'
+                  example: consequatur
+                name:
+                  type: string
+                  description: 'El nombre completo del usuario. Ejemplo: John Doe'
+                  example: consequatur
+                password:
+                  type: string
+                  description: 'La contraseña del usuario. Ejemplo: secret123'
+                  example: 'O[2UZ5ij-e/dl4m{o,'
+                type:
+                  type: string
+                  description: 'El tipo de usuario. Puede ser "admin", "junta", "partner" o "guest". Ejemplo: partner'
+                  example: consequatur
+                registration_date:
+                  type: date
+                  description: 'La fecha de registro del usuario. Ejemplo: 2024-01-01'
+                  example: consequatur
+                email:
+                  type: string
+                  description: 'El correo electrónico del usuario. Ejemplo: john.doe@example.com'
+                  example: qkunze@example.com
+                  nullable: true
+                telephone:
+                  type: string
+                  description: 'El número de teléfono del usuario. Ejemplo: 123456789'
+                  example: consequatur
+                  nullable: true
+                age:
+                  type: integer
+                  description: 'La edad del usuario. Ejemplo: 30'
+                  example: 17
+                language:
+                  type: string
+                  description: 'El idioma preferido del usuario. Puede ser "en", "es" o "ca". Ejemplo: es'
+                  example: consequatur
+              required:
+                - nickname
+                - name
+                - password
+                - type
+                - registration_date
+                - age
+                - language
+  '/api/v1/users/{id}':
+    get:
+      summary: 'Detalle de un usuario'
+      operationId: detalleDeUnUsuario
+      description: 'Devuelve la información de un usuario específico.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  num_partner: 123
+                  nickname: john_doe
+                  name: 'John Doe'
+                  email: john.doe@example.com
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  num_partner:
+                    type: integer
+                    example: 123
+                  nickname:
+                    type: string
+                    example: john_doe
+                  name:
+                    type: string
+                    example: 'John Doe'
+                  email:
+                    type: string
+                    example: john.doe@example.com
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User Not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User Not autenticated'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Usuarios
+    put:
+      summary: 'Actualizar usuarios'
+      operationId: actualizarUsuarios
+      description: 'Actualiza la información de un usuario específico.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  num_partner: 123
+                  nickname: john_doe
+                  name: 'John Doe'
+                  email: john.doe@example.com
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  num_partner:
+                    type: integer
+                    example: 123
+                  nickname:
+                    type: string
+                    example: john_doe
+                  name:
+                    type: string
+                    example: 'John Doe'
+                  email:
+                    type: string
+                    example: john.doe@example.com
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User Not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User Not autenticated'
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    num_partner:
+                      - 'The num partner must be an integer.'
+                    nickname:
+                      - 'The nickname must be a string.'
+                    name:
+                      - 'The name must be a string.'
+                    password:
+                      - 'The password must be at least 6 characters.'
+                    type:
+                      - 'The type must be one of: admin, junta, partner, guest.'
+                    registration_date:
+                      - 'The registration date is not a valid date.'
+                    email:
+                      - 'The email must be a valid email address.'
+                    telephone:
+                      - 'The telephone must be a string.'
+                    age:
+                      - 'The age must be an integer.'
+                    language:
+                      - 'The language must be one of: en, es, ca.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      num_partner:
+                        type: array
+                        example:
+                          - 'The num partner must be an integer.'
+                        items:
+                          type: string
+                      nickname:
+                        type: array
+                        example:
+                          - 'The nickname must be a string.'
+                        items:
+                          type: string
+                      name:
+                        type: array
+                        example:
+                          - 'The name must be a string.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password must be at least 6 characters.'
+                        items:
+                          type: string
+                      type:
+                        type: array
+                        example:
+                          - 'The type must be one of: admin, junta, partner, guest.'
+                        items:
+                          type: string
+                      registration_date:
+                        type: array
+                        example:
+                          - 'The registration date is not a valid date.'
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        example:
+                          - 'The email must be a valid email address.'
+                        items:
+                          type: string
+                      telephone:
+                        type: array
+                        example:
+                          - 'The telephone must be a string.'
+                        items:
+                          type: string
+                      age:
+                        type: array
+                        example:
+                          - 'The age must be an integer.'
+                        items:
+                          type: string
+                      language:
+                        type: array
+                        example:
+                          - 'The language must be one of: en, es, ca.'
+                        items:
+                          type: string
+      tags:
+        - Usuarios
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                num_partner:
+                  type: integer
+                  description: 'El número de socio del usuario. Ejemplo: 123'
+                  example: 17
+                nickname:
+                  type: string
+                  description: 'El apodo del usuario. Ejemplo: john_doe'
+                  example: consequatur
+                name:
+                  type: string
+                  description: 'El nombre completo del usuario. Ejemplo: John Doe'
+                  example: consequatur
+                password:
+                  type: string
+                  description: 'La contraseña del usuario. Ejemplo: secret123'
+                  example: 'O[2UZ5ij-e/dl4m{o,'
+                type:
+                  type: string
+                  description: 'El tipo de usuario. Puede ser "admin", "junta", "partner" o "guest". Ejemplo: partner'
+                  example: consequatur
+                registration_date:
+                  type: date
+                  description: 'La fecha de registro del usuario. Ejemplo: 2024-01-01'
+                  example: consequatur
+                withdrawal_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2026-04-26T10:37:43'
+                  nullable: true
+                email:
+                  type: string
+                  description: 'El correo electrónico del usuario. Ejemplo: john.doe@example.com'
+                  example: qkunze@example.com
+                  nullable: true
+                telephone:
+                  type: string
+                  description: 'El número de teléfono del usuario. Ejemplo: 123456789'
+                  example: consequatur
+                  nullable: true
+                age:
+                  type: integer
+                  description: 'La edad del usuario. Ejemplo: 30'
+                  example: 17
+                language:
+                  type: string
+                  description: 'El idioma preferido del usuario. Puede ser "en", "es" o "ca". Ejemplo: es'
+                  example: consequatur
+    delete:
+      summary: 'Dar de baja a un usuario'
+      operationId: darDeBajaAUnUsuario
+      description: 'Marca a un usuario como dado de baja en la aplicación.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User deleted'
+                properties:
+                  message:
+                    type: string
+                    example: 'User deleted'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User Not autenticated'
+                properties:
+                  message:
+                    type: string
+                    example: 'User Not autenticated'
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Forbidden
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Not Found'
+                properties:
+                  message:
+                    type: string
+                    example: 'Not Found'
+      tags:
+        - Usuarios
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'El ID del usuario. Ejemplo: 1'
+        example: 17
+        required: true
+        schema:
+          type: integer

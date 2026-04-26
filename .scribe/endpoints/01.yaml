@@ -1,0 +1,698 @@
+name: Usuarios
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/users
+    metadata:
+      custom: []
+      groupName: Usuarios
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Listar usuarios'
+      description: 'Devuelve todos los usuarios registrados.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          [
+            {
+              "id": 1,
+              "num_partner": 123,
+              "nickname": "john_doe",
+              "name": "John Doe",
+              "email": "john.doe@example.com"
+            }
+          ]
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthorized"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/users/{id}'
+    metadata:
+      custom: []
+      groupName: Usuarios
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Detalle de un usuario'
+      description: 'Devuelve la información de un usuario específico.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'El ID del usuario. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+              "id": 1,
+              "num_partner": 123,
+              "nickname": "john_doe",
+              "name": "John Doe",
+              "email": "john.doe@example.com"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "User Not autenticated"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/users
+    metadata:
+      custom: []
+      groupName: Usuarios
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Crear usuarios'
+      description: 'Crea un nuevo usuario en la aplicación.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      num_partner:
+        custom: []
+        name: num_partner
+        description: 'nullable El número de socio del usuario. Ejemplo: 123'
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      nickname:
+        custom: []
+        name: nickname
+        description: 'El apodo del usuario. Ejemplo: john_doe'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'El nombre completo del usuario. Ejemplo: John Doe'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'La contraseña del usuario. Ejemplo: secret123'
+        required: true
+        example: 'O[2UZ5ij-e/dl4m{o,'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      type:
+        custom: []
+        name: type
+        description: 'El tipo de usuario. Puede ser "admin", "junta", "partner" o "guest". Ejemplo: partner'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      registration_date:
+        custom: []
+        name: registration_date
+        description: 'La fecha de registro del usuario. Ejemplo: 2024-01-01'
+        required: true
+        example: consequatur
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: 'El correo electrónico del usuario. Ejemplo: john.doe@example.com'
+        required: false
+        example: qkunze@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      telephone:
+        custom: []
+        name: telephone
+        description: 'El número de teléfono del usuario. Ejemplo: 123456789'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      age:
+        custom: []
+        name: age
+        description: 'La edad del usuario. Ejemplo: 30'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      language:
+        custom: []
+        name: language
+        description: 'El idioma preferido del usuario. Puede ser "en", "es" o "ca". Ejemplo: es'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      num_partner: 17
+      nickname: consequatur
+      name: consequatur
+      password: 'O[2UZ5ij-e/dl4m{o,'
+      type: consequatur
+      registration_date: consequatur
+      email: qkunze@example.com
+      telephone: consequatur
+      age: 17
+      language: consequatur
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+           "token": "eyJ0eXAiOiJKV1QiLC",
+           "user": {
+             "id": 1,
+             "num_partner": 123,
+             "nickname": "john_doe",
+             "name": "John Doe",
+             "email": "john.doe@example.com"
+           }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "User Not autenticated"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "num_partner": [
+                "The num partner field is required."
+              ],
+              "nickname": [
+                "The nickname field is required."
+              ],
+              "name": [
+                "The name field is required."
+              ],
+              "password": [
+                "The password field is required."
+              ],
+              "type": [
+                "The type field is required."
+              ],
+              "registration_date": [
+                "The registration date field is required."
+              ],
+              "age": [
+                "The age field is required."
+              ],
+              "language": [
+                "The language field is required."
+              ]
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/users/{id}'
+    metadata:
+      custom: []
+      groupName: Usuarios
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Actualizar usuarios'
+      description: 'Actualiza la información de un usuario específico.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'El ID del usuario. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      num_partner:
+        custom: []
+        name: num_partner
+        description: 'El número de socio del usuario. Ejemplo: 123'
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      nickname:
+        custom: []
+        name: nickname
+        description: 'El apodo del usuario. Ejemplo: john_doe'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'El nombre completo del usuario. Ejemplo: John Doe'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'La contraseña del usuario. Ejemplo: secret123'
+        required: false
+        example: 'O[2UZ5ij-e/dl4m{o,'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      type:
+        custom: []
+        name: type
+        description: 'El tipo de usuario. Puede ser "admin", "junta", "partner" o "guest". Ejemplo: partner'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      registration_date:
+        custom: []
+        name: registration_date
+        description: 'La fecha de registro del usuario. Ejemplo: 2024-01-01'
+        required: false
+        example: consequatur
+        type: date
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      withdrawal_date:
+        custom: []
+        name: withdrawal_date
+        description: 'Must be a valid date.'
+        required: false
+        example: '2026-04-26T10:37:43'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: 'El correo electrónico del usuario. Ejemplo: john.doe@example.com'
+        required: false
+        example: qkunze@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      telephone:
+        custom: []
+        name: telephone
+        description: 'El número de teléfono del usuario. Ejemplo: 123456789'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      age:
+        custom: []
+        name: age
+        description: 'La edad del usuario. Ejemplo: 30'
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      language:
+        custom: []
+        name: language
+        description: 'El idioma preferido del usuario. Puede ser "en", "es" o "ca". Ejemplo: es'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      num_partner: 17
+      nickname: consequatur
+      name: consequatur
+      password: 'O[2UZ5ij-e/dl4m{o,'
+      type: consequatur
+      registration_date: consequatur
+      withdrawal_date: '2026-04-26T10:37:43'
+      email: qkunze@example.com
+      telephone: consequatur
+      age: 17
+      language: consequatur
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "num_partner": 123,
+            "nickname": "john_doe",
+            "name": "John Doe",
+            "email": "john.doe@example.com"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "User Not autenticated"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "Forbidden"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "num_partner": [
+                "The num partner must be an integer."
+              ],
+              "nickname": [
+                "The nickname must be a string."
+              ],
+              "name": [
+                "The name must be a string."
+              ],
+              "password": [
+                "The password must be at least 6 characters."
+              ],
+              "type": [
+                "The type must be one of: admin, junta, partner, guest."
+              ],
+              "registration_date": [
+                "The registration date is not a valid date."
+              ],
+              "email": [
+                "The email must be a valid email address."
+              ],
+              "telephone": [
+                "The telephone must be a string."
+              ],
+              "age": [
+                "The age must be an integer."
+              ],
+              "language": [
+                "The language must be one of: en, es, ca."
+              ]
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/users/{id}'
+    metadata:
+      custom: []
+      groupName: Usuarios
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Dar de baja a un usuario'
+      description: 'Marca a un usuario como dado de baja en la aplicación.'
+      authenticated: true
+      deprecated: false
+    headers:
+      authorization: '{TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'El ID del usuario. Ejemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "User deleted"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "User Not autenticated"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "message": "Forbidden"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Not Found"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - authorization
+      - 'Bearer {token}'
+    controller: null
+    method: null
+    route: null
