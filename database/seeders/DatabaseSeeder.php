@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             BoardgameSeeder::class,
             ZassessionSeeder::class,
             GameSeeder::class,
+            BoardgameTypeSeeder::class,
+            UserZassessionSeeder::class,
+            GameUserSeeder::class,
         ]);
         
         Client::create([
