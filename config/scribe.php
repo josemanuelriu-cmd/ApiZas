@@ -285,26 +285,5 @@ INTRO,
     ],
     'response_calls' => [
         'enabled' => false,
-        'before' => function ($request, $endpoint) {
-            static $token = null;
-
-            if (!$token) {
-                $response = app()->handle(
-                    \Illuminate\Http\Request::create('/api/v1/login', 'POST', [
-                        'email' => 'test@scribe.com',
-                        'password' => 'password',
-                    ])
-                );
-
-                $data = json_decode($response->getContent(), true);
-                $token = $data['token'] ?? null;
-            }
-
-            if ($token) {
-                $request->headers->set('Authorization', 'Bearer ' . $token);
-            }
-
-            return $request;
-        },
     ],
 ];
