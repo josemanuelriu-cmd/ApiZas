@@ -20,14 +20,17 @@ class DatabaseSeeder extends Seeder
             BoardgameSeeder::class,
             ZassessionSeeder::class,
             GameSeeder::class,
+            BoardgameTypeSeeder::class,
+            UserZassessionSeeder::class,
+            GameUserSeeder::class,
         ]);
         
         Client::create([
             'name'          => 'ApiZas Personal Access Client',
             'secret'        => Str::random(40),
             'provider'      => 'users',
-            'redirect_uris' => json_encode([]),
-            'grant_types'   => json_encode(['personal_access']),
+            'redirect_uris' => [],
+            'grant_types'   => ['personal_access'],
             'revoked'       => false,
         ]);
 
