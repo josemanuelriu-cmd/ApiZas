@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Artisan;
+
+use Laravel\Passport\Client;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,9 +21,15 @@ class DatabaseSeeder extends Seeder
             ZassessionSeeder::class,
             GameSeeder::class,
         ]);
-        Artisan::call('passport:client', [
-            '--personal' => true,
-            '--name'     => 'ApiZas Personal Access Client',
+        
+        Client::create([
+            'name'          => 'ApiZas Personal Access Client',
+            'secret'        => Str::random(40),
+            'provider'      => 'users',
+            'redirect_uris' => json_encode([]),
+            'grant_types'   => json_encode(['personal_access']),
+            'revoked'       => false,
         ]);
+
     }
 }
