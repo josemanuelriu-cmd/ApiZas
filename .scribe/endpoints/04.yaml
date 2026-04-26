@@ -321,31 +321,31 @@ endpoints:
             "message": "The given data was invalid.",
            "errors": {
              "name": [
-               "El nombre es obligatorio."
+               "The name field is required."
              ],
              "event_name": [
-               "El nombre del evento es obligatorio."
+               "The event name field is required."
              ],
              "date": [
-               "La fecha es obligatoria."
+               "The date field is required."
              ],
              "start_time": [
-               "La hora de inicio es obligatoria."
+               "The start time field is required."
              ],
              "end_time": [
-               "La hora de fin es obligatoria."
+               "The end time field is required."
              ],
              "max_users": [
-               "El número máximo de usuarios es obligatorio."
+               "The max users field is required."
              ],
              "direction": [
-               "La dirección es obligatoria."
+               "The direction field is required."
              ],
              "latitude": [
-               "La latitud es obligatoria."
+               "The latitude field is required."
              ],
              "longitude": [
-               "La longitud es obligatoria."
+               "The longitude field is required."
              ]
            }
           }
@@ -554,31 +554,31 @@ endpoints:
             "message": "The given data was invalid.",
             "errors": {
              "name": [
-               "El nombre es obligatorio."
+               "The name field is required."
              ],
              "event_name": [
-               "El nombre del evento es obligatorio."
+               "The event name field is required."
              ],
              "date": [
-               "La fecha es obligatoria."
+               "The date field is required."
              ],
              "start_time": [
-               "La hora de inicio es obligatoria."
+               "The start time field is required."
              ],
              "end_time": [
-               "La hora de fin es obligatoria."
+               "The end time field is required."
              ],
              "max_users": [
-               "El número máximo de usuarios es obligatorio."
+               "The max users field is required."
              ],
              "direction": [
-               "La dirección es obligatoria."
+               "The direction field is required."
              ],
              "latitude": [
-               "La latitud es obligatoria."
+               "The latitude field is required."
              ],
              "longitude": [
-               "La longitud es obligatoria."
+               "The longitude field is required."
              ]
             }
           }
@@ -761,7 +761,7 @@ endpoints:
             "message": "Session is full"
           }
         headers: []
-        description: 'Sesión llena'
+        description: 'Full Session'
       -
         custom: []
         status: 409
@@ -770,7 +770,7 @@ endpoints:
             "message": "User already joined this session"
           }
         headers: []
-        description: 'Usuario ya inscrito'
+        description: 'User already registered'
     responseFields: []
     auth:
       - headers
