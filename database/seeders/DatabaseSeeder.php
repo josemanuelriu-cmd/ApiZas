@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
             'name'          => 'ApiZas Personal Access Client',
             'secret'        => Str::random(40),
             'provider'      => 'users',
-            'redirect_uris' => json_encode([]),
-            'grant_types'   => json_encode(['personal_access']),
+            'redirect_uris' => [],
+            'grant_types'   => ['personal_access'],
             'revoked'       => false,
         ]);
 

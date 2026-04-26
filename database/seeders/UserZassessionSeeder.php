@@ -10,12 +10,12 @@ class UserZassessionSeeder extends Seeder
 {
     public function run(): void
     {
-        $zassession1 = Zassession::where('name', 'Zassession 1')->first();
-        $zassession2 = Zassession::where('name', 'Zassession 2')->first();
+        $zassession1 = Zassession::first();
+        $zassession2 = Zassession::skip(1)->first();
 
-        $admin   = User::where('email', 'test1@example.com')->first();
-        $junta   = User::where('email', 'test2@example.com')->first();
-        $partner = User::where('email', 'test3@example.com')->first();
+        $admin   = User::first();
+        $junta   = User::skip(1)->first();
+        $partner = User::skip(2)->first();
 
         $zassession1->users()->attach([$admin->id, $junta->id]);
         $zassession2->users()->attach([$partner->id]);
