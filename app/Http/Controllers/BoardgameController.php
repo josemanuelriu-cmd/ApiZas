@@ -110,19 +110,19 @@ class BoardgameController extends Controller
      *   "message": "The given data was invalid.",
      *   "errors": {
      *    "name": [
-     *      "El nombre es obligatorio."
+     *      "The name field is required."
      *    ],
      *   "min_players": [
-     *      "El número mínimo de jugadores es obligatorio."
+     *      "The min players field is required."
      *    ],
      *   "max_players": [
-     *      "El número máximo de jugadores es obligatorio."
+     *      "The max players field is required."
      *    ],
      *   "min_age": [
-     *      "La edad mínima es obligatoria."
+     *      "The min age field is required."
      *    ],
      *   "duration": [
-     *      "La duración es obligatoria."
+     *      "The duration field is required."
      *    ]
      *   }
      * }
@@ -227,19 +227,19 @@ class BoardgameController extends Controller
      *   "message": "The given data was invalid.",
      *   "errors": {
      *    "name": [
-     *      "El nombre es obligatorio."
+     *      "The name field is required."
      *    ],
      *   "min_players": [
-     *      "El número mínimo de jugadores es obligatorio."
+     *      "The min players field is required."
      *    ],
      *   "max_players": [
-     *      "El número máximo de jugadores es obligatorio."
+     *      "The max players field is required."
      *    ],
      *   "min_age": [
-     *      "La edad mínima es obligatoria."
+     *      "The min age field is required."
      *    ],
      *   "duration": [
-     *      "La duración es obligatoria."
+     *      "The duration field is required."
      *    ]
      *   }
      * }    

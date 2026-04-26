@@ -1,66 +1,296 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ApiZas
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="http://localhost:8000/docs"><strong>📄 Scribe Documentation</strong></a>
+  &nbsp;·&nbsp;
+  <a href="http://localhost:8000/api/docs-scalar"><strong>🌙 Scalar Documentation</strong></a>
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📚 Table of Contents
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [About](#about)
+- [Tech Stack](#-tech-stack)
+- [Features & Endpoints](#features--endpoints)
+- [Roles & Permissions](#-roles--permissions)
+- [Setup & Installation](#-setup--installation)
+- [Environment Variables](#-environment-variables)
+- [API Documentation](#-api-documentation)
+- [Testing](#-testing)
+- [Postman Collection](#-postman-collection)
+- [Upcoming Improvements](#-upcoming-improvements)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## About
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**ApiZas** is a RESTful API built with Laravel 12 designed to manage board games, sessions, and matches between users.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+It includes authentication via Laravel Passport, role-based access control, session participation, game tracking, and statistics.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+All endpoints follow REST conventions and are versioned under:
 
-## Laravel Sponsors
+```
+/api/v1/
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 💻 Tech Stack
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Runtime:** PHP 8.2
+- **Framework:** Laravel 12
+- **Authentication:** Laravel Passport (OAuth2 — Bearer Token)
+- **Database:** MySQL
+- **Architecture:** RESTful API
+- **Testing:** PHPUnit (TDD)
+- **Documentation:** Scribe + Scalar
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Features & Endpoints
 
-## Code of Conduct
+All endpoints are prefixed with `/api/v1/`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+### 🔐 Authentication
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- `POST /login` → Authenticate user
+- `POST /register` → Register new user
+- `POST /logout` → Logout *(requires auth)*
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 👤 Users
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/users` | List all users | admin, junta |
+| GET | `/users/{id}` | Get user detail | admin, junta |
+| POST | `/users` | Create user | admin |
+| PUT | `/users/{id}` | Update user | owner / admin |
+| DELETE | `/users/{id}` | Delete user | admin |
+
+---
+
+### 🧩 Types (Game Categories)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/types` | List types | admin, junta, partner |
+| GET | `/types/{id}` | Type detail | admin, junta, partner |
+| POST | `/types` | Create type | admin, junta |
+| PUT | `/types/{id}` | Update type | admin, junta |
+| DELETE | `/types/{id}` | Delete type | admin |
+
+---
+
+### 🎲 Boardgames
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/boardgames` | List all board games | authenticated |
+| GET | `/boardgames/{id}` | Game details | authenticated |
+| POST | `/boardgames` | Create game | admin, junta |
+| PUT | `/boardgames/{id}` | Update game | admin, junta |
+| DELETE | `/boardgames/{id}` | Delete game | admin, junta |
+
+---
+
+### 🧑‍🤝‍🧑 Zassessions (Game Sessions)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/zassessions` | List sessions | authenticated |
+| GET | `/zassessions/{id}` | Session detail | authenticated |
+| POST | `/zassessions` | Create session | admin, junta |
+| PUT | `/zassessions/{id}` | Update session | admin, junta |
+| DELETE | `/zassessions/{id}` | Delete session | admin, junta |
+| POST | `/zassessions/{id}/join` | Join session | authenticated |
+| DELETE | `/zassessions/{id}/leave` | Leave session | authenticated |
+| GET | `/zassessions/{id}/users` | Session users | authenticated |
+
+#### 📊 Session Stats
+- `GET /zassessions/stats` → Global stats *(admin, junta, partner)*
+- `GET /zassessions/{id}/stats` → Session stats *(admin, junta, partner)*
+
+#### 🎮 Session Games
+- `GET /zassessions/{id}/games` → Games in session *(all roles)*
+
+---
+
+### 🎮 Games (Matches)
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/games` | List all matches | admin, junta, partner |
+| GET | `/games/{id}` | Match detail | authenticated |
+| POST | `/games` | Create match | admin, junta, partner |
+| PUT | `/games/{id}` | Update match | admin, junta |
+| DELETE | `/games/{id}` | Delete match | admin, junta |
+| POST | `/games/{id}/join` | Join match | authenticated |
+| DELETE | `/games/{id}/leave` | Leave match | authenticated |
+| GET | `/games/{id}/users` | Match players | authenticated |
+
+#### 📊 Game Stats
+- `GET /games/{id}/stats` → Match stats *(admin, junta, partner)*
+
+---
+
+## 🔐 Roles & Permissions
+
+The API implements **role-based access control**:
+
+| Role | Description |
+|------|-------------|
+| **admin** | Full access to all endpoints |
+| **junta** | Full access except editing other users |
+| **partner** | Limited read + create games + view stats |
+| **guest** | Join/leave sessions and games only |
+
+---
+
+## 🔧 Setup & Installation
+
+### Prerequisites
+
+- PHP >= 8.2
+- Composer
+- MySQL
+- XAMPP (or equivalent)
+
+---
+
+### Clone repository
+
+```bash
+git clone https://github.com/josemanuelriu-cmd/ApiZas.git
+cd ApiZas
+```
+
+### Enable Sodium extension (XAMPP)
+
+Open `C:\xampp\php\php.ini`, find `;extension=sodium`, remove the semicolon, save and restart XAMPP.
+
+### Install dependencies
+
+```bash
+composer install
+```
+
+### Configure environment
+
+```bash
+cp .env.example .env
+```
+
+### Generate keys
+
+```bash
+php artisan key:generate
+php artisan passport:keys
+```
+
+### Run migrations and seed
+
+```bash
+php artisan migrate --seed
+```
+
+> The seeder automatically creates the Passport personal access client.
+
+### Start server
+
+```bash
+php artisan serve
+```
+
+API available at: `http://localhost:8000/api/v1/`
+
+---
+
+## 🔑 Environment Variables
+
+```env
+APP_NAME=ApiZas
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=apizas
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+---
+
+## 📖 API Documentation
+
+Generate documentation:
+
+```bash
+php artisan scribe:generate
+```
+
+Then visit:
+
+| Interface | URL |
+|-----------|-----|
+| Scribe HTML | `http://localhost:8000/docs` |
+| Scalar UI | `http://localhost:8000/api/docs-scalar` |
+| OpenAPI spec | `http://localhost:8000/docs/openapi.yaml` |
+| Postman collection | `http://localhost:8000/docs/collection.json` |
+
+---
+
+## 🧪 Testing
+
+This project was developed using **TDD (Test-Driven Development)**. Tests are written before implementation.
+
+Run all tests:
+
+```bash
+php artisan test
+```
+
+Run a specific test file:
+
+```bash
+php artisan test --filter UserManagementTest
+```
+
+| Test file | Coverage |
+|-----------|----------|
+| UserTest | Authentication |
+| UserManagementTest | Users CRUD |
+| TypesTest | Types CRUD |
+| BoardgameTest | Boardgames CRUD |
+| ZassessionTest | Sessions CRUD + join/leave/stats |
+| GameTest | Games CRUD + join/leave/stats |
+
+---
+
+## 📮 Postman Collection
+
+Import the auto-generated collection and test the API directly:
+
+1. Import `http://localhost:8000/docs/collection.json` into Postman
+2. Set base URL: `http://localhost:8000/api/v1`
+3. Authenticate via `POST /login` or `POST /register`
+4. Use the returned Bearer token for protected routes
+
+---
+
+## 🚧 Upcoming Improvements
+
+- Pagination for listings
+- Advanced filters (by players, type, difficulty)
+- Improved stats system
+- Notifications for sessions
+- Image uploads for board games

@@ -11,7 +11,7 @@
     <script>
       Scalar.createApiReference('#app', {
         url: '{{ url("/docs/openapi.yaml") }}',
-        theme: 'purple',
+        theme: 'moon',
       })
     </script>
   </body>

@@ -115,7 +115,7 @@ class GameController extends Controller
     * @bodyParam host_user_id integer required El ID del usuario que será el anfitrión de la partida. Ejemplo: 1
     * @bodyParam max_players integer required El número máximo de jugadores permitidos en la partida. Ejemplo: 10
     * @bodyParam start_time string required La hora de inicio de la partida en formato HH:mm:ss. Ejemplo: 14:30:00
-    * @bodyParam status string required El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open
+    * @bodyParam status string required El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open
     * @bodyParam necesary_know_how boolean required Indica si es necesario tener conocimientos previos para jugar la partida. Ejemplo: true
     *
     * @response 201 {
@@ -197,7 +197,7 @@ class GameController extends Controller
     * @bodyParam host_user_id integer optional El ID del usuario que será el anfitrión de la partida. Ejemplo: 1
     * @bodyParam max_players integer optional El número máximo de jugadores permitidos en la partida. Ejemplo: 10
     * @bodyParam start_time string optional La hora de inicio de la partida en formato HH:mm:ss. Ejemplo: 14:30:00
-    * @bodyParam status string optional El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open
+    * @bodyParam status string optional El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open
     * @bodyParam necesary_know_how boolean optional Indica si es necesario tener conocimientos previos para jugar la partida. Ejemplo: true
     *
     * @response 200 {
@@ -358,7 +358,7 @@ class GameController extends Controller
     *     "num_partner": 123,
     *     "name": "John Doe",
     *     "nickname": "johnny",
-    *     "email": "john.doe@Ejemplo.com"
+    *     "email": "john.doe@example.com"
     *   }
     * ]
     * @response 400 {

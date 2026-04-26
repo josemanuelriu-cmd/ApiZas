@@ -314,7 +314,7 @@ endpoints:
       status:
         custom: []
         name: status
-        description: 'El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open'
+        description: 'El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open'
         required: true
         example: consequatur
         type: string
@@ -479,7 +479,7 @@ endpoints:
       status:
         custom: []
         name: status
-        description: 'optional El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open'
+        description: 'optional El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open'
         required: false
         example: consequatur
         type: string
@@ -902,7 +902,7 @@ endpoints:
               "num_partner": 123,
               "name": "John Doe",
               "nickname": "johnny",
-              "email": "john.doe@Ejemplo.com"
+              "email": "john.doe@example.com"
             }
           ]
         headers: []

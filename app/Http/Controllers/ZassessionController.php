@@ -105,31 +105,31 @@ class ZassessionController extends Controller
      *   "message": "The given data was invalid.",
      *  "errors": {
      *    "name": [
-     *      "El nombre es obligatorio."
+     *      "The name field is required."
      *    ],
      *    "event_name": [
-     *      "El nombre del evento es obligatorio."
+     *      "The event name field is required."
      *    ],
      *    "date": [
-     *      "La fecha es obligatoria."
+     *      "The date field is required."
      *    ],
      *    "start_time": [
-     *      "La hora de inicio es obligatoria."
+     *      "The start time field is required."
      *    ],
      *    "end_time": [
-     *      "La hora de fin es obligatoria."
+     *      "The end time field is required."
      *    ],
      *    "max_users": [
-     *      "El número máximo de usuarios es obligatorio."
+     *      "The max users field is required."
      *    ],
      *    "direction": [
-     *      "La dirección es obligatoria."
+     *      "The direction field is required."
      *    ],
      *    "latitude": [
-     *      "La latitud es obligatoria."
+     *      "The latitude field is required."
      *    ],
      *    "longitude": [
-     *      "La longitud es obligatoria."
+     *      "The longitude field is required."
      *    ]
      *  }
      * }     
@@ -226,31 +226,31 @@ class ZassessionController extends Controller
      *   "message": "The given data was invalid.",
      *   "errors": {
      *    "name": [
-     *      "El nombre es obligatorio."
+     *      "The name field is required."
      *    ],
      *    "event_name": [
-     *      "El nombre del evento es obligatorio."
+     *      "The event name field is required."
      *    ],
      *    "date": [
-     *      "La fecha es obligatoria."
+     *      "The date field is required."
      *    ],
      *    "start_time": [
-     *      "La hora de inicio es obligatoria."
+     *      "The start time field is required."
      *    ],
      *    "end_time": [
-     *      "La hora de fin es obligatoria."
+     *      "The end time field is required."
      *    ],
      *    "max_users": [
-     *      "El número máximo de usuarios es obligatorio."
+     *      "The max users field is required."
      *    ],
      *    "direction": [
-     *      "La dirección es obligatoria."
+     *      "The direction field is required."
      *    ],
      *    "latitude": [
-     *      "La latitud es obligatoria."
+     *      "The latitude field is required."
      *    ],
      *    "longitude": [
-     *      "La longitud es obligatoria."
+     *      "The longitude field is required."
      *    ]
      *   }
      * }     
@@ -295,10 +295,10 @@ class ZassessionController extends Controller
      * @response 404 {
      *   "message": "Not Found"
      * }     
-     * @response 409 scenario="Sesión llena" {
+     * @response 409 scenario="Full Session" {
      *   "message": "Session is full"
      * }
-     * @response 409 scenario="Usuario ya inscrito" {
+     * @response 409 scenario="User already registered" {
      *   "message": "User already joined this session"
      * }
      */

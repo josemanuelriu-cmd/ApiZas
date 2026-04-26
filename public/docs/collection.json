@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "APIZAS API Documentation",
-        "_postman_id": "7d627390-9476-4d14-9e2c-0651ac3b0d22",
+        "_postman_id": "78f75c37-8cc9-4c68-9fb4-9d34cdf5d64b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -85,7 +85,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"num_partner\":17,\"nickname\":\"consequatur\",\"name\":\"mqeopfuudtdsufvyvddqa\",\"email\":\"eloisa.harber@example.com\",\"password\":\"[*UyPJ\\\"}6\",\"type\":\"guest\",\"registration_date\":\"2026-04-25T22:28:31\",\"telephone\":\"consequatur\",\"age\":17,\"language\":\"en\"}"
+                            "raw": "{\"num_partner\":17,\"nickname\":\"consequatur\",\"name\":\"mqeopfuudtdsufvyvddqa\",\"email\":\"eloisa.harber@example.com\",\"password\":\"[*UyPJ\\\"}6\",\"type\":\"junta\",\"registration_date\":\"2026-04-26T10:37:43\",\"telephone\":\"consequatur\",\"age\":17,\"language\":\"ca\"}"
                         },
                         "description": "Crea un nuevo usuario en la aplicaci\u00f3n.",
                         "auth": {
@@ -103,13 +103,13 @@
                             "header": [],
                             "code": 422,
                             "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"email\": [\n      \"The email field is required.\"\n    ],\n    \"password\": [\n      \"The password field is required.\"\n    ]\n  }\n}",
-                            "name": "Datos inv\u00e1lidos"
+                            "name": "Invalid data"
                         },
                         {
                             "header": [],
                             "code": 422,
                             "body": "{\n  \"message\": \"The email has already been taken.\",\n  \"errors\": {\n    \"email\": [\n      \"The email has already been taken.\"\n    ]\n  }\n}",
-                            "name": "Email ya registrado"
+                            "name": "Email already registered"
                         }
                     ]
                 },
@@ -295,7 +295,7 @@
                         {
                             "header": [],
                             "code": 422,
-                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n  \"min_players\": [\n     \"El n\u00famero m\u00ednimo de jugadores es obligatorio.\"\n   ],\n  \"max_players\": [\n     \"El n\u00famero m\u00e1ximo de jugadores es obligatorio.\"\n   ],\n  \"min_age\": [\n     \"La edad m\u00ednima es obligatoria.\"\n   ],\n  \"duration\": [\n     \"La duraci\u00f3n es obligatoria.\"\n   ]\n  }\n}",
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"The name field is required.\"\n   ],\n  \"min_players\": [\n     \"The min players field is required.\"\n   ],\n  \"max_players\": [\n     \"The max players field is required.\"\n   ],\n  \"min_age\": [\n     \"The min age field is required.\"\n   ],\n  \"duration\": [\n     \"The duration field is required.\"\n   ]\n  }\n}",
                             "name": ""
                         }
                     ]
@@ -362,7 +362,7 @@
                         {
                             "header": [],
                             "code": 422,
-                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n  \"min_players\": [\n     \"El n\u00famero m\u00ednimo de jugadores es obligatorio.\"\n   ],\n  \"max_players\": [\n     \"El n\u00famero m\u00e1ximo de jugadores es obligatorio.\"\n   ],\n  \"min_age\": [\n     \"La edad m\u00ednima es obligatoria.\"\n   ],\n  \"duration\": [\n     \"La duraci\u00f3n es obligatoria.\"\n   ]\n  }\n}",
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"The name field is required.\"\n   ],\n  \"min_players\": [\n     \"The min players field is required.\"\n   ],\n  \"max_players\": [\n     \"The max players field is required.\"\n   ],\n  \"min_age\": [\n     \"The min age field is required.\"\n   ],\n  \"duration\": [\n     \"The duration field is required.\"\n   ]\n  }\n}",
                             "name": ""
                         }
                     ]
@@ -914,7 +914,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "[\n  {\n    \"id\": 1,\n    \"num_partner\": 123,\n    \"name\": \"John Doe\",\n    \"nickname\": \"johnny\",\n    \"email\": \"john.doe@Ejemplo.com\"\n  }\n]",
+                            "body": "[\n  {\n    \"id\": 1,\n    \"num_partner\": 123,\n    \"name\": \"John Doe\",\n    \"nickname\": \"johnny\",\n    \"email\": \"john.doe@example.com\"\n  }\n]",
                             "name": ""
                         },
                         {
@@ -1151,7 +1151,7 @@
                         {
                             "header": [],
                             "code": 422,
-                            "body": "{\n  \"message\": \"The given data was invalid.\",\n \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n   \"event_name\": [\n     \"El nombre del evento es obligatorio.\"\n   ],\n   \"date\": [\n     \"La fecha es obligatoria.\"\n   ],\n   \"start_time\": [\n     \"La hora de inicio es obligatoria.\"\n   ],\n   \"end_time\": [\n     \"La hora de fin es obligatoria.\"\n   ],\n   \"max_users\": [\n     \"El n\u00famero m\u00e1ximo de usuarios es obligatorio.\"\n   ],\n   \"direction\": [\n     \"La direcci\u00f3n es obligatoria.\"\n   ],\n   \"latitude\": [\n     \"La latitud es obligatoria.\"\n   ],\n   \"longitude\": [\n     \"La longitud es obligatoria.\"\n   ]\n }\n}",
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n \"errors\": {\n   \"name\": [\n     \"The name field is required.\"\n   ],\n   \"event_name\": [\n     \"The event name field is required.\"\n   ],\n   \"date\": [\n     \"The date field is required.\"\n   ],\n   \"start_time\": [\n     \"The start time field is required.\"\n   ],\n   \"end_time\": [\n     \"The end time field is required.\"\n   ],\n   \"max_users\": [\n     \"The max users field is required.\"\n   ],\n   \"direction\": [\n     \"The direction field is required.\"\n   ],\n   \"latitude\": [\n     \"The latitude field is required.\"\n   ],\n   \"longitude\": [\n     \"The longitude field is required.\"\n   ]\n }\n}",
                             "name": ""
                         }
                     ]
@@ -1218,7 +1218,7 @@
                         {
                             "header": [],
                             "code": 422,
-                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"El nombre es obligatorio.\"\n   ],\n   \"event_name\": [\n     \"El nombre del evento es obligatorio.\"\n   ],\n   \"date\": [\n     \"La fecha es obligatoria.\"\n   ],\n   \"start_time\": [\n     \"La hora de inicio es obligatoria.\"\n   ],\n   \"end_time\": [\n     \"La hora de fin es obligatoria.\"\n   ],\n   \"max_users\": [\n     \"El n\u00famero m\u00e1ximo de usuarios es obligatorio.\"\n   ],\n   \"direction\": [\n     \"La direcci\u00f3n es obligatoria.\"\n   ],\n   \"latitude\": [\n     \"La latitud es obligatoria.\"\n   ],\n   \"longitude\": [\n     \"La longitud es obligatoria.\"\n   ]\n  }\n}",
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n   \"name\": [\n     \"The name field is required.\"\n   ],\n   \"event_name\": [\n     \"The event name field is required.\"\n   ],\n   \"date\": [\n     \"The date field is required.\"\n   ],\n   \"start_time\": [\n     \"The start time field is required.\"\n   ],\n   \"end_time\": [\n     \"The end time field is required.\"\n   ],\n   \"max_users\": [\n     \"The max users field is required.\"\n   ],\n   \"direction\": [\n     \"The direction field is required.\"\n   ],\n   \"latitude\": [\n     \"The latitude field is required.\"\n   ],\n   \"longitude\": [\n     \"The longitude field is required.\"\n   ]\n  }\n}",
                             "name": ""
                         }
                     ]
@@ -1341,13 +1341,13 @@
                             "header": [],
                             "code": 409,
                             "body": "{\n  \"message\": \"Session is full\"\n}",
-                            "name": "Sesi\u00f3n llena"
+                            "name": "Full Session"
                         },
                         {
                             "header": [],
                             "code": 409,
                             "body": "{\n  \"message\": \"User already joined this session\"\n}",
-                            "name": "Usuario ya inscrito"
+                            "name": "User already registered"
                         }
                     ]
                 },
@@ -2046,7 +2046,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"num_partner\":17,\"nickname\":\"consequatur\",\"name\":\"consequatur\",\"password\":\"O[2UZ5ij-e\\\/dl4m{o,\",\"type\":\"consequatur\",\"registration_date\":\"consequatur\",\"withdrawal_date\":\"2026-04-25T22:28:32\",\"email\":\"qkunze@example.com\",\"telephone\":\"consequatur\",\"age\":17,\"language\":\"consequatur\"}"
+                            "raw": "{\"num_partner\":17,\"nickname\":\"consequatur\",\"name\":\"consequatur\",\"password\":\"O[2UZ5ij-e\\\/dl4m{o,\",\"type\":\"consequatur\",\"registration_date\":\"consequatur\",\"withdrawal_date\":\"2026-04-26T10:37:43\",\"email\":\"qkunze@example.com\",\"telephone\":\"consequatur\",\"age\":17,\"language\":\"consequatur\"}"
                         },
                         "description": "Actualiza la informaci\u00f3n de un usuario espec\u00edfico."
                     },
