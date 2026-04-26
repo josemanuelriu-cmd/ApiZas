@@ -162,7 +162,7 @@ paths:
               schema:
                 oneOf:
                   -
-                    description: 'Datos inválidos'
+                    description: 'Invalid data'
                     type: object
                     example:
                       message: 'The given data was invalid.'
@@ -191,7 +191,7 @@ paths:
                             items:
                               type: string
                   -
-                    description: 'Email ya registrado'
+                    description: 'Email already registered'
                     type: object
                     example:
                       message: 'The email has already been taken.'
@@ -244,7 +244,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: guest
+                  example: admin
                   enum:
                     - admin
                     - junta
@@ -253,7 +253,7 @@ paths:
                 registration_date:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-04-25T22:28:31'
+                  example: '2026-04-26T10:22:32'
                 telephone:
                   type: string
                   description: ''
@@ -463,15 +463,15 @@ paths:
                   message: 'The given data was invalid.'
                   errors:
                     name:
-                      - 'El nombre es obligatorio.'
+                      - 'The name field is required.'
                     min_players:
-                      - 'El número mínimo de jugadores es obligatorio.'
+                      - 'The min players field is required.'
                     max_players:
-                      - 'El número máximo de jugadores es obligatorio.'
+                      - 'The max players field is required.'
                     min_age:
-                      - 'La edad mínima es obligatoria.'
+                      - 'The min age field is required.'
                     duration:
-                      - 'La duración es obligatoria.'
+                      - 'The duration field is required.'
                 properties:
                   message:
                     type: string
@@ -482,31 +482,31 @@ paths:
                       name:
                         type: array
                         example:
-                          - 'El nombre es obligatorio.'
+                          - 'The name field is required.'
                         items:
                           type: string
                       min_players:
                         type: array
                         example:
-                          - 'El número mínimo de jugadores es obligatorio.'
+                          - 'The min players field is required.'
                         items:
                           type: string
                       max_players:
                         type: array
                         example:
-                          - 'El número máximo de jugadores es obligatorio.'
+                          - 'The max players field is required.'
                         items:
                           type: string
                       min_age:
                         type: array
                         example:
-                          - 'La edad mínima es obligatoria.'
+                          - 'The min age field is required.'
                         items:
                           type: string
                       duration:
                         type: array
                         example:
-                          - 'La duración es obligatoria.'
+                          - 'The duration field is required.'
                         items:
                           type: string
       tags:
@@ -731,15 +731,15 @@ paths:
                   message: 'The given data was invalid.'
                   errors:
                     name:
-                      - 'El nombre es obligatorio.'
+                      - 'The name field is required.'
                     min_players:
-                      - 'El número mínimo de jugadores es obligatorio.'
+                      - 'The min players field is required.'
                     max_players:
-                      - 'El número máximo de jugadores es obligatorio.'
+                      - 'The max players field is required.'
                     min_age:
-                      - 'La edad mínima es obligatoria.'
+                      - 'The min age field is required.'
                     duration:
-                      - 'La duración es obligatoria.'
+                      - 'The duration field is required.'
                 properties:
                   message:
                     type: string
@@ -750,31 +750,31 @@ paths:
                       name:
                         type: array
                         example:
-                          - 'El nombre es obligatorio.'
+                          - 'The name field is required.'
                         items:
                           type: string
                       min_players:
                         type: array
                         example:
-                          - 'El número mínimo de jugadores es obligatorio.'
+                          - 'The min players field is required.'
                         items:
                           type: string
                       max_players:
                         type: array
                         example:
-                          - 'El número máximo de jugadores es obligatorio.'
+                          - 'The max players field is required.'
                         items:
                           type: string
                       min_age:
                         type: array
                         example:
-                          - 'La edad mínima es obligatoria.'
+                          - 'The min age field is required.'
                         items:
                           type: string
                       duration:
                         type: array
                         example:
-                          - 'La duración es obligatoria.'
+                          - 'The duration field is required.'
                         items:
                           type: string
       tags:
@@ -1137,7 +1137,7 @@ paths:
                   example: consequatur
                 status:
                   type: string
-                  description: 'El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open'
+                  description: 'El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open'
                   example: consequatur
                 necesary_know_how:
                   type: boolean
@@ -1337,7 +1337,7 @@ paths:
                   example: consequatur
                 status:
                   type: string
-                  description: 'optional El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open'
+                  description: 'optional El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open'
                   example: consequatur
                 necesary_know_how:
                   type: boolean
@@ -1598,14 +1598,14 @@ paths:
                       example: johnny
                     email:
                       type: string
-                      example: john.doe@Ejemplo.com
+                      example: john.doe@example.com
                 example:
                   -
                     id: 1
                     num_partner: 123
                     name: 'John Doe'
                     nickname: johnny
-                    email: john.doe@Ejemplo.com
+                    email: john.doe@example.com
         400:
           description: ''
           content:
@@ -3725,7 +3725,7 @@ paths:
                 withdrawal_date:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-04-25T22:28:32'
+                  example: '2026-04-26T10:22:33'
                   nullable: true
                 email:
                   type: string

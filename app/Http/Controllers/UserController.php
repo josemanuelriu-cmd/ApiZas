@@ -104,7 +104,7 @@ class UserController extends Controller
      *    "email": "john.doe@example.com"
      *   }
      * }
-     * @response 422 scenario="Datos inválidos" {
+     * @response 422 scenario="Invalid data" {
      *   "message": "The given data was invalid.",
      *   "errors": {
      *     "email": [
@@ -115,7 +115,7 @@ class UserController extends Controller
      *     ]
      *   }
      * }
-     * @response 422 scenario="Email ya registrado" {
+     * @response 422 scenario="Email already registered" {
      *   "message": "The email has already been taken.",
      *   "errors": {
      *     "email": [

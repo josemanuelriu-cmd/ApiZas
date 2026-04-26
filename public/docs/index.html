@@ -233,7 +233,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: April 25, 2026</li>
+        <li>Last updated: April 26, 2026</li>
     </ul>
 </div>
 
@@ -488,8 +488,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"name\": \"mqeopfuudtdsufvyvddqa\",
     \"email\": \"eloisa.harber@example.com\",
     \"password\": \"[*UyPJ\\\"}6\",
-    \"type\": \"guest\",
-    \"registration_date\": \"2026-04-25T22:28:31\",
+    \"type\": \"admin\",
+    \"registration_date\": \"2026-04-26T10:22:32\",
     \"telephone\": \"consequatur\",
     \"age\": 17,
     \"language\": \"en\"
@@ -513,8 +513,8 @@ let body = {
     "name": "mqeopfuudtdsufvyvddqa",
     "email": "eloisa.harber@example.com",
     "password": "[*UyPJ\"}6",
-    "type": "guest",
-    "registration_date": "2026-04-25T22:28:31",
+    "type": "admin",
+    "registration_date": "2026-04-26T10:22:32",
     "telephone": "consequatur",
     "age": 17,
     "language": "en"
@@ -543,8 +543,8 @@ $response = $client-&gt;post(
             'name' =&gt; 'mqeopfuudtdsufvyvddqa',
             'email' =&gt; 'eloisa.harber@example.com',
             'password' =&gt; '[*UyPJ"}6',
-            'type' =&gt; 'guest',
-            'registration_date' =&gt; '2026-04-25T22:28:31',
+            'type' =&gt; 'admin',
+            'registration_date' =&gt; '2026-04-26T10:22:32',
             'telephone' =&gt; 'consequatur',
             'age' =&gt; 17,
             'language' =&gt; 'en',
@@ -574,7 +574,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
             <blockquote>
-            <p>Example response (422, Datos inválidos):</p>
+            <p>Example response (422, Invalid data):</p>
         </blockquote>
                 <pre>
 
@@ -591,7 +591,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 }</code>
  </pre>
             <blockquote>
-            <p>Example response (422, Email ya registrado):</p>
+            <p>Example response (422, Email already registered):</p>
         </blockquote>
                 <pre>
 
@@ -744,10 +744,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-register"
-               value="guest"
+               value="admin"
                data-component="body">
     <br>
-<p>Example: <code>guest</code></p>
+<p>Example: <code>admin</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>junta</code></li> <li><code>partner</code></li> <li><code>guest</code></li></ul>
         </div>
@@ -758,10 +758,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="registration_date"                data-endpoint="POSTapi-v1-register"
-               value="2026-04-25T22:28:31"
+               value="2026-04-26T10:22:32"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-25T22:28:31</code></p>
+<p>Must be a valid date. Example: <code>2026-04-26T10:22:32</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>telephone</code></b>&nbsp;&nbsp;
@@ -1470,19 +1470,19 @@ print_r(json_decode((string) $body));</code></pre></div>
     &quot;message&quot;: &quot;The given data was invalid.&quot;,
     &quot;errors&quot;: {
         &quot;name&quot;: [
-            &quot;El nombre es obligatorio.&quot;
+            &quot;The name field is required.&quot;
         ],
         &quot;min_players&quot;: [
-            &quot;El n&uacute;mero m&iacute;nimo de jugadores es obligatorio.&quot;
+            &quot;The min players field is required.&quot;
         ],
         &quot;max_players&quot;: [
-            &quot;El n&uacute;mero m&aacute;ximo de jugadores es obligatorio.&quot;
+            &quot;The max players field is required.&quot;
         ],
         &quot;min_age&quot;: [
-            &quot;La edad m&iacute;nima es obligatoria.&quot;
+            &quot;The min age field is required.&quot;
         ],
         &quot;duration&quot;: [
-            &quot;La duraci&oacute;n es obligatoria.&quot;
+            &quot;The duration field is required.&quot;
         ]
     }
 }</code>
@@ -1834,19 +1834,19 @@ print_r(json_decode((string) $body));</code></pre></div>
     &quot;message&quot;: &quot;The given data was invalid.&quot;,
     &quot;errors&quot;: {
         &quot;name&quot;: [
-            &quot;El nombre es obligatorio.&quot;
+            &quot;The name field is required.&quot;
         ],
         &quot;min_players&quot;: [
-            &quot;El n&uacute;mero m&iacute;nimo de jugadores es obligatorio.&quot;
+            &quot;The min players field is required.&quot;
         ],
         &quot;max_players&quot;: [
-            &quot;El n&uacute;mero m&aacute;ximo de jugadores es obligatorio.&quot;
+            &quot;The max players field is required.&quot;
         ],
         &quot;min_age&quot;: [
-            &quot;La edad m&iacute;nima es obligatoria.&quot;
+            &quot;The min age field is required.&quot;
         ],
         &quot;duration&quot;: [
-            &quot;La duraci&oacute;n es obligatoria.&quot;
+            &quot;The duration field is required.&quot;
         ]
     }
 }</code>
@@ -3087,7 +3087,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="consequatur"
                data-component="body">
     <br>
-<p>El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open Example: <code>consequatur</code></p>
+<p>El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>necesary_know_how</code></b>&nbsp;&nbsp;
@@ -3410,7 +3410,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="consequatur"
                data-component="body">
     <br>
-<p>optional El estado actual de la partida (por ejemplo, "open", "en curso", "finalizada"). Ejemplo: open Example: <code>consequatur</code></p>
+<p>optional El estado actual de la partida (por ejemplo, "open", "limited", "playing", "finished"). Ejemplo: open Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>necesary_know_how</code></b>&nbsp;&nbsp;
@@ -4113,7 +4113,7 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;num_partner&quot;: 123,
         &quot;name&quot;: &quot;John Doe&quot;,
         &quot;nickname&quot;: &quot;johnny&quot;,
-        &quot;email&quot;: &quot;john.doe@Ejemplo.com&quot;
+        &quot;email&quot;: &quot;john.doe@example.com&quot;
     }
 ]</code>
  </pre>
@@ -8580,7 +8580,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"password\": \"O[2UZ5ij-e\\/dl4m{o,\",
     \"type\": \"consequatur\",
     \"registration_date\": \"consequatur\",
-    \"withdrawal_date\": \"2026-04-25T22:28:32\",
+    \"withdrawal_date\": \"2026-04-26T10:22:33\",
     \"email\": \"qkunze@example.com\",
     \"telephone\": \"consequatur\",
     \"age\": 17,
@@ -8607,7 +8607,7 @@ let body = {
     "password": "O[2UZ5ij-e\/dl4m{o,",
     "type": "consequatur",
     "registration_date": "consequatur",
-    "withdrawal_date": "2026-04-25T22:28:32",
+    "withdrawal_date": "2026-04-26T10:22:33",
     "email": "qkunze@example.com",
     "telephone": "consequatur",
     "age": 17,
@@ -8639,7 +8639,7 @@ $response = $client-&gt;put(
             'password' =&gt; 'O[2UZ5ij-e/dl4m{o,',
             'type' =&gt; 'consequatur',
             'registration_date' =&gt; 'consequatur',
-            'withdrawal_date' =&gt; '2026-04-25T22:28:32',
+            'withdrawal_date' =&gt; '2026-04-26T10:22:33',
             'email' =&gt; 'qkunze@example.com',
             'telephone' =&gt; 'consequatur',
             'age' =&gt; 17,
@@ -8911,10 +8911,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="withdrawal_date"                data-endpoint="PUTapi-v1-users--id-"
-               value="2026-04-25T22:28:32"
+               value="2026-04-26T10:22:33"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-25T22:28:32</code></p>
+<p>Must be a valid date. Example: <code>2026-04-26T10:22:33</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;

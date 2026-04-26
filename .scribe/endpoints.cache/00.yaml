@@ -166,7 +166,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: guest
+        example: admin
         type: string
         enumValues:
           - admin
@@ -181,7 +181,7 @@ endpoints:
         name: registration_date
         description: 'Must be a valid date.'
         required: true
-        example: '2026-04-25T22:28:31'
+        example: '2026-04-26T10:22:32'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -229,8 +229,8 @@ endpoints:
       name: mqeopfuudtdsufvyvddqa
       email: eloisa.harber@example.com
       password: '[*UyPJ"}6'
-      type: guest
-      registration_date: '2026-04-25T22:28:31'
+      type: admin
+      registration_date: '2026-04-26T10:22:32'
       telephone: consequatur
       age: 17
       language: en
@@ -268,7 +268,7 @@ endpoints:
             }
           }
         headers: []
-        description: 'Datos inválidos'
+        description: 'Invalid data'
       -
         custom: []
         status: 422
@@ -282,7 +282,7 @@ endpoints:
             }
           }
         headers: []
-        description: 'Email ya registrado'
+        description: 'Email already registered'
     responseFields: []
     auth: []
     controller: null
