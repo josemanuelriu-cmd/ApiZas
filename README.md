@@ -1,7 +1,7 @@
 # ApiZas
 
 <p align="center">
-  <a href="https://apizas-production.up.railway.app/docs"><strong>📄 Scribe Documentation</strong></a>
+  <a href="https://apizas-production.up.railway.app/docs/index.html"><strong>📄 Scribe Documentation</strong></a>
   &nbsp;·&nbsp;
   <a href="https://apizas-production.up.railway.app/api/docs-scalar"><strong>🌙 Scalar Documentation</strong></a>
 </p>
@@ -32,7 +32,7 @@ The API is live at:
 | Interface | URL |
 |-----------|-----|
 | API | `https://apizas-production.up.railway.app/api/v1/` |
-| Scribe docs | `https://apizas-production.up.railway.app/docs` |
+| Scribe docs | `https://apizas-production.up.railway.app/docs/index.html` |
 | Scalar UI | `https://apizas-production.up.railway.app/api/docs-scalar` |
 
 ---
