@@ -12,25 +12,6 @@ Route::get('/', function () {
 
 Route::view('/docs-scalar', 'scalar');
 
-Route::get('/v1/debug-token', function () {
-    $privateKey = config('passport.private_key');
-    $publicKey  = config('passport.public_key');
-
-    $testData  = 'test';
-    $signature = '';
-    $signOk    = openssl_sign($testData, $signature, $privateKey, OPENSSL_ALGO_SHA256);
-    $verifyOk  = $signOk ? openssl_verify($testData, $signature, $publicKey, OPENSSL_ALGO_SHA256) : -1;
-
-    return response()->json([
-        'private_key_prefix' => substr($privateKey ?? '', 0, 27),
-        'private_key_length' => strlen($privateKey ?? ''),
-        'public_key_prefix'  => substr($publicKey ?? '', 0, 26),
-        'public_key_length'  => strlen($publicKey ?? ''),
-        'sign_ok'            => $signOk,
-        'verify_ok'          => $verifyOk,
-        'openssl_error'      => openssl_error_string(),
-    ]);
-});
 
 Route::post('/v1/login', [UserController::class, 'login']);
 Route::post('/v1/register', [UserController::class, 'register']);
