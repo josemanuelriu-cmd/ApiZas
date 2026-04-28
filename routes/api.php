@@ -12,6 +12,24 @@ Route::get('/', function () {
 
 Route::view('/docs-scalar', 'scalar');
 
+Route::get('/v1/debug-token', function () {
+    $user = App\Models\User::first();
+    $token = $user->createToken('debug')->accessToken;
+
+    $request = \Illuminate\Http\Request::create('/api/v1/zassessions', 'GET');
+    $request->headers->set('Authorization', 'Bearer ' . $token);
+    $request->headers->set('Accept', 'application/json');
+    $response = app(\Illuminate\Contracts\Http\Kernel::class)->handle($request);
+
+    return response()->json([
+        'internal_status'    => $response->getStatusCode(),
+        'private_key_set'    => !empty(config('passport.private_key')),
+        'private_key_prefix' => substr(config('passport.private_key') ?? '', 0, 27),
+        'public_key_set'     => !empty(config('passport.public_key')),
+        'public_key_prefix'  => substr(config('passport.public_key') ?? '', 0, 26),
+    ]);
+});
+
 Route::post('/v1/login', [UserController::class, 'login']);
 Route::post('/v1/register', [UserController::class, 'register']);
 Route::middleware('auth:api')->group(function () {
