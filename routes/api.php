@@ -13,20 +13,22 @@ Route::get('/', function () {
 Route::view('/docs-scalar', 'scalar');
 
 Route::get('/v1/debug-token', function () {
-    $user = App\Models\User::first();
-    $token = $user->createToken('debug')->accessToken;
+    $privateKey = config('passport.private_key');
+    $publicKey  = config('passport.public_key');
 
-    $request = \Illuminate\Http\Request::create('/api/v1/zassessions', 'GET');
-    $request->headers->set('Authorization', 'Bearer ' . $token);
-    $request->headers->set('Accept', 'application/json');
-    $response = app(\Illuminate\Contracts\Http\Kernel::class)->handle($request);
+    $testData  = 'test';
+    $signature = '';
+    $signOk    = openssl_sign($testData, $signature, $privateKey, OPENSSL_ALGO_SHA256);
+    $verifyOk  = $signOk ? openssl_verify($testData, $signature, $publicKey, OPENSSL_ALGO_SHA256) : -1;
 
     return response()->json([
-        'internal_status'    => $response->getStatusCode(),
-        'private_key_set'    => !empty(config('passport.private_key')),
-        'private_key_prefix' => substr(config('passport.private_key') ?? '', 0, 27),
-        'public_key_set'     => !empty(config('passport.public_key')),
-        'public_key_prefix'  => substr(config('passport.public_key') ?? '', 0, 26),
+        'private_key_prefix' => substr($privateKey ?? '', 0, 27),
+        'private_key_length' => strlen($privateKey ?? ''),
+        'public_key_prefix'  => substr($publicKey ?? '', 0, 26),
+        'public_key_length'  => strlen($publicKey ?? ''),
+        'sign_ok'            => $signOk,
+        'verify_ok'          => $verifyOk,
+        'openssl_error'      => openssl_error_string(),
     ]);
 });
 
